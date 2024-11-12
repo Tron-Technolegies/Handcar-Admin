@@ -13,7 +13,12 @@ export const navItems = [
   { id: 3, icon: <AiFillProduct />, name: "Products", path: "/products" },
   { id: 4, icon: <MdCategory />, name: "Category", path: "/category" },
   { id: 5, icon: <MdBrandingWatermark />, name: "Brand", path: "/brand" },
-  { id: 6, icon: <MdHomeRepairService />, name: "Services", path: "/services" },
+  {
+    id: 6,
+    icon: <MdHomeRepairService />,
+    name: "Service Providers",
+    path: "/services",
+  },
   {
     id: 7,
     icon: <MdOutlineSubscriptions />,

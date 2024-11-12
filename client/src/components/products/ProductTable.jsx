@@ -6,13 +6,16 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { MdDelete } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 function createData(product, stock, price) {
   return { product, stock, price };
 }
+
 const rows = [
   createData(
-    <div className="flex gap-2 items-center w-fit">
+    <Link to={"/products/1"} className="flex gap-2 items-center w-fit">
       <img
         src="/dashboard/product.png"
         className="w-[50px] h-[50px] rounded-md"
@@ -21,12 +24,12 @@ const rows = [
         <p className="font-medium">Dash Cam</p>
         <p className="text-sm text-[#7D7D7D]">A800S</p>
       </div>
-    </div>,
+    </Link>,
     35,
     "$35"
   ),
   createData(
-    <div className="flex gap-2 items-center w-fit">
+    <Link to={"/products/2"} className="flex gap-2 items-center w-fit">
       <img
         src="/dashboard/product.png"
         className="w-[50px] h-[50px] rounded-md"
@@ -35,12 +38,12 @@ const rows = [
         <p className="font-medium">Dash Cam</p>
         <p className="text-sm text-[#7D7D7D]">A800S</p>
       </div>
-    </div>,
+    </Link>,
     40,
     "$35"
   ),
   createData(
-    <div className="flex gap-2 items-center max-w-fit">
+    <Link to={"/products/3"} className="flex gap-2 items-center max-w-fit">
       <img
         src="/dashboard/product.png"
         className="w-[50px] h-[50px] rounded-md"
@@ -49,13 +52,13 @@ const rows = [
         <p className="font-medium">Dash Cam</p>
         <p className="text-sm text-[#7D7D7D]">A800S</p>
       </div>
-    </div>,
+    </Link>,
     50,
     "$35"
   ),
 ];
 
-export default function LatestProducts() {
+export default function ProductTable() {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -67,14 +70,19 @@ export default function LatestProducts() {
               Product
             </TableCell>
             <TableCell
-              sx={{ width: "30%", textAlign: "center", fontWeight: "bold" }}
+              sx={{ width: "20%", textAlign: "center", fontWeight: "bold" }}
             >
               Stock
             </TableCell>
             <TableCell
-              sx={{ width: "30%", textAlign: "center", fontWeight: "bold" }}
+              sx={{ width: "20%", textAlign: "center", fontWeight: "bold" }}
             >
               Price
+            </TableCell>
+            <TableCell
+              sx={{ width: "20%", textAlign: "center", fontWeight: "bold" }}
+            >
+              Action
             </TableCell>
           </TableRow>
         </TableHead>
@@ -91,11 +99,16 @@ export default function LatestProducts() {
               >
                 {row.product}
               </TableCell>
-              <TableCell sx={{ width: "30%", textAlign: "center" }}>
+              <TableCell sx={{ width: "20%", textAlign: "center" }}>
                 {row.stock}
               </TableCell>
-              <TableCell sx={{ width: "30%", textAlign: "center" }}>
+              <TableCell sx={{ width: "20%", textAlign: "center" }}>
                 {row.price}
+              </TableCell>
+              <TableCell sx={{ width: "20%", textAlign: "center" }}>
+                <p className="flex justify-center">
+                  <MdDelete />
+                </p>
               </TableCell>
             </TableRow>
           ))}

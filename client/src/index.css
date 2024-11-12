@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.form {
+  width: 90vw;
+  @apply max-w-xl bg-white rounded shadow-lg py-8 px-10 my-12 mx-auto;
+}
+.form-label {
+  @apply block text-sm mb-3 capitalize leading-normal;
+}
+.form-input,
+.form-textarea,
+.form-select {
+  @apply w-full py-1 px-3 rounded-lg  border border-gray-300 text-gray-900 h-11;
+}
+.form-input,
+.form-select,
+.form-btn {
+  @apply h-11;
+}
+.form-row {
+  margin-bottom: 1rem;
+  width: 100%;
+}

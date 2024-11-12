@@ -11,6 +11,9 @@ import SubscriptionPage from "./pages/subscriptions/SubscriptionPage";
 import LogPage from "./pages/logs/LogPage";
 import OfferPage from "./pages/offers/OfferPage";
 import PromotionPage from "./pages/promotions/PromotionPage";
+import ProductSinglePage from "./pages/products/ProductSinglePage";
+import AddNewProduct from "./pages/products/AddNewProduct";
+import EditProductPage from "./pages/products/EditProductPage";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -26,6 +29,18 @@ export default function App() {
         {
           path: "products",
           element: <ProductsPage />,
+        },
+        {
+          path: "products/new",
+          element: <AddNewProduct />,
+        },
+        {
+          path: "products/:id",
+          element: <ProductSinglePage />,
+        },
+        {
+          path: "products/:id/edit",
+          element: <EditProductPage />,
         },
         {
           path: "category",
