@@ -14,12 +14,23 @@ import PromotionPage from "./pages/promotions/PromotionPage";
 import ProductSinglePage from "./pages/products/ProductSinglePage";
 import AddNewProduct from "./pages/products/AddNewProduct";
 import EditProductPage from "./pages/products/EditProductPage";
+import AddVendor from "./pages/services/AddVendor";
+import EditVendor from "./pages/services/EditVendor";
+import ErrorPage from "./pages/errorPage/ErrorPage";
+import AddSubscribersPage from "./pages/subscriptions/AddSubscribersPage";
+import AddBrandPage from "./pages/brand/AddBrandPage";
+import EditBrandPage from "./pages/brand/EditBrandPage";
+import AddCategoryPage from "./pages/Category/AddCategoryPage";
+import EditCategoryPage from "./pages/Category/EditCategoryPage";
+import AddCoupon from "./pages/offers/AddCoupon";
+import EditCoupon from "./pages/offers/EditCoupon";
 
 export default function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <Layout />,
+      errorElement: <ErrorPage />,
       children: [
         { index: true, element: <DashboardPage /> },
         {
@@ -47,16 +58,44 @@ export default function App() {
           element: <CategoryPage />,
         },
         {
+          path: "category/new",
+          element: <AddCategoryPage />,
+        },
+        {
+          path: "category/:id/edit",
+          element: <EditCategoryPage />,
+        },
+        {
           path: "brand",
           element: <BrandPage />,
+        },
+        {
+          path: "brand/new",
+          element: <AddBrandPage />,
+        },
+        {
+          path: "brand/:id/edit",
+          element: <EditBrandPage />,
         },
         {
           path: "services",
           element: <ServicePage />,
         },
         {
+          path: "services/new",
+          element: <AddVendor />,
+        },
+        {
+          path: "services/:id/edit",
+          element: <EditVendor />,
+        },
+        {
           path: "subscriptions",
           element: <SubscriptionPage />,
+        },
+        {
+          path: "subscriptions/new",
+          element: <AddSubscribersPage />,
         },
         {
           path: "logs",
@@ -65,6 +104,14 @@ export default function App() {
         {
           path: "offers",
           element: <OfferPage />,
+        },
+        {
+          path: "offers/new",
+          element: <AddCoupon />,
+        },
+        {
+          path: "offers/:id/edit",
+          element: <EditCoupon />,
         },
         {
           path: "promotions",
