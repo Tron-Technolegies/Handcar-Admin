@@ -24,6 +24,7 @@ import AddCategoryPage from "./pages/Category/AddCategoryPage";
 import EditCategoryPage from "./pages/Category/EditCategoryPage";
 import AddCoupon from "./pages/offers/AddCoupon";
 import EditCoupon from "./pages/offers/EditCoupon";
+import PlansPage from "./pages/plans/PlansPage";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -116,6 +117,10 @@ export default function App() {
         {
           path: "promotions",
           element: <PromotionPage />,
+        },
+        {
+          path: "plans",
+          element: <PlansPage />,
         },
       ],
     },

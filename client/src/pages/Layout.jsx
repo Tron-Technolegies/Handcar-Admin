@@ -9,7 +9,7 @@ export default function Layout() {
       <SideBar />
       <div className="w-full">
         <Header />
-        <div className="p-5">
+        <div className="p-5 mb-10">
           <Outlet />
         </div>
       </div>
