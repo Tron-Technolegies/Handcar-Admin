@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { AdminContext } from "../../AdminContext";
 
 function createData(category) {
   return { category };
@@ -22,6 +23,7 @@ const rows = [
 ];
 
 export default function CategoryTable() {
+  const { setShowDeletePopup } = useContext(AdminContext);
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -57,7 +59,7 @@ export default function CategoryTable() {
                   <Link to={"/category/1/edit"}>
                     <FaRegEdit />
                   </Link>
-                  <button>
+                  <button onClick={() => setShowDeletePopup(true)}>
                     <RiDeleteBin6Line />
                   </button>
                 </div>

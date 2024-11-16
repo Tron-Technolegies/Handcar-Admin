@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -8,6 +8,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { AdminContext } from "../../AdminContext";
 
 function createData(product, stock, price) {
   return { product, stock, price };
@@ -59,6 +61,7 @@ const rows = [
 ];
 
 export default function ProductTable() {
+  const { setShowDeletePopup } = useContext(AdminContext);
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -106,9 +109,11 @@ export default function ProductTable() {
                 {row.price}
               </TableCell>
               <TableCell sx={{ width: "20%", textAlign: "center" }}>
-                <p className="flex justify-center">
-                  <MdDelete />
-                </p>
+                <div className="flex gap-5 justify-center text-xl text-[#ABABAB]">
+                  <button onClick={() => setShowDeletePopup(true)}>
+                    <RiDeleteBin6Line />
+                  </button>
+                </div>
               </TableCell>
             </TableRow>
           ))}

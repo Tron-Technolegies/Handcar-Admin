@@ -8,7 +8,7 @@ export default function SideBar() {
   const location = useLocation();
 
   return (
-    <div className="w-[300px] p-5 flex flex-col gap-7 border shadow-lg min-h-screen">
+    <div className="w-[300px] p-5 flex flex-col gap-7 border shadow-lg min-h-screen sticky top-0 left-0">
       <div className="border-b pb-3">
         <img src="/logo.png" className="w-[180px]"></img>
       </div>

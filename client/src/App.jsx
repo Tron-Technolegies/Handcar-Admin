@@ -25,6 +25,8 @@ import EditCategoryPage from "./pages/Category/EditCategoryPage";
 import AddCoupon from "./pages/offers/AddCoupon";
 import EditCoupon from "./pages/offers/EditCoupon";
 import PlansPage from "./pages/plans/PlansPage";
+import AddPlanPage from "./pages/plans/AddPlanPage";
+import EditPlanPage from "./pages/plans/EditPlanPage";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -121,6 +123,14 @@ export default function App() {
         {
           path: "plans",
           element: <PlansPage />,
+        },
+        {
+          path: "plans/new",
+          element: <AddPlanPage />,
+        },
+        {
+          path: "plans/:id/edit",
+          element: <EditPlanPage />,
         },
       ],
     },

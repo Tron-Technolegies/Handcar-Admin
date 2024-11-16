@@ -6,23 +6,24 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { FaRegEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AdminContext } from "../../AdminContext";
 
-function createData(vendor, joined, location) {
-  return { vendor, joined, location };
+function createData(planName, serviceType, Duration, price) {
+  return { planName, serviceType, Duration, price };
 }
 
 const rows = [
-  createData("Tom Cruise", "10/10/2024", "UAE"),
-  createData("Tom Brady", "10/10/2024", "America"),
-  createData("Angelina", "10/10/2024", "England"),
-  createData("Tom Cruise", "10/10/2024", "Australia"),
+  createData("Basic", "Car wash", "6 months", "$ 100"),
+  createData("Premium", "Maintenance", "6 months", "$ 100"),
+  createData("Luxuary", "Car wash", "6 months", "$ 100"),
+  createData("Basic", "Car wash", "6 months", "$ 100"),
+  createData("Basic", "Car wash", "6 months", "$ 100"),
 ];
 
-export default function VendorTable() {
+export default function PlanTable() {
   const { setShowDeletePopup } = useContext(AdminContext);
   return (
     <TableContainer component={Paper}>
@@ -30,22 +31,27 @@ export default function VendorTable() {
         <TableHead>
           <TableRow sx={{ backgroundColor: "#F9FAFB" }}>
             <TableCell
-              sx={{ width: "25%", textAlign: "center", fontWeight: "bold" }}
+              sx={{ width: "20%", textAlign: "center", fontWeight: "bold" }}
             >
-              Vendor
+              Plan Name
             </TableCell>
             <TableCell
-              sx={{ width: "25%", textAlign: "center", fontWeight: "bold" }}
+              sx={{ width: "20%", textAlign: "center", fontWeight: "bold" }}
             >
-              Joined At
+              Service Type
             </TableCell>
             <TableCell
-              sx={{ width: "25%", textAlign: "center", fontWeight: "bold" }}
+              sx={{ width: "20%", textAlign: "center", fontWeight: "bold" }}
             >
-              Location
+              Duration
             </TableCell>
             <TableCell
-              sx={{ width: "25%", textAlign: "center", fontWeight: "bold" }}
+              sx={{ width: "20%", textAlign: "center", fontWeight: "bold" }}
+            >
+              Price
+            </TableCell>
+            <TableCell
+              sx={{ width: "20%", textAlign: "center", fontWeight: "bold" }}
             >
               Action
             </TableCell>
@@ -60,19 +66,22 @@ export default function VendorTable() {
               <TableCell
                 component="th"
                 scope="row"
-                sx={{ width: "25%", textAlign: "center" }}
+                sx={{ width: "20%", textAlign: "center" }}
               >
-                {row.vendor}
+                {row.planName}
               </TableCell>
-              <TableCell sx={{ width: "25%", textAlign: "center" }}>
-                {row.joined}
+              <TableCell sx={{ width: "20%", textAlign: "center" }}>
+                {row.serviceType}
               </TableCell>
-              <TableCell sx={{ width: "25%", textAlign: "center" }}>
-                {row.location}
+              <TableCell sx={{ width: "20%", textAlign: "center" }}>
+                {row.Duration}
               </TableCell>
-              <TableCell sx={{ width: "25%", textAlign: "center" }}>
+              <TableCell sx={{ width: "20%", textAlign: "center" }}>
+                {row.price}
+              </TableCell>
+              <TableCell sx={{ width: "20%", textAlign: "center" }}>
                 <div className="flex gap-5 justify-center text-xl text-[#ABABAB]">
-                  <Link to={"/services/1/edit"}>
+                  <Link to={"/plans/1/edit"}>
                     <FaRegEdit />
                   </Link>
                   <button onClick={() => setShowDeletePopup(true)}>
