@@ -27,6 +27,7 @@ import EditCoupon from "./pages/offers/EditCoupon";
 import PlansPage from "./pages/plans/PlansPage";
 import AddPlanPage from "./pages/plans/AddPlanPage";
 import EditPlanPage from "./pages/plans/EditPlanPage";
+import LoginPage from "./pages/login/LoginPage";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -36,6 +37,10 @@ export default function App() {
       errorElement: <ErrorPage />,
       children: [
         { index: true, element: <DashboardPage /> },
+        {
+          path: "login",
+          element: <LoginPage />,
+        },
         {
           path: "users",
           element: <UserPage />,
