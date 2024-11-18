@@ -6,7 +6,7 @@ export default function CategoryHeader() {
   return (
     <div className="mb-10">
       <h4 className="text-2xl font-semibold">All Categories</h4>
-      <div className="flex gap-2 justify-end items-center">
+      <div className="flex sm:flex-row flex-col-reverse sm:gap-2 gap-5 justify-end sm:items-center items-start sm:my-0 my-5">
         <SearchBox />
         <AddButton route={"/category/new"} title={"Add Category"} />
       </div>

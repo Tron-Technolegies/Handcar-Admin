@@ -36,7 +36,7 @@ const statData1 = [
 export default function StatsSection() {
   return (
     <div>
-      <div className="grid grid-cols-3 gap-3 place-items-center">
+      <div className="grid md:grid-cols-3 grid-cols-1 gap-3 place-items-center">
         {statData1.map((x, index) => (
           <StatElt
             key={index}
@@ -49,9 +49,9 @@ export default function StatsSection() {
           />
         ))}
       </div>
-      <div className="flex gap-2 my-10">
-        <div className="flex flex-col gap-5">
-          <p className="text-2xl font-semibold">Sales Data</p>
+      <div className="flex xl:flex-row flex-col gap-2 my-10">
+        <div className="flex flex-col justify-center gap-5 mx-auto">
+          <p className="text-2xl font-semibold text-left w-full">Sales Data</p>
           <Graph />
         </div>
         <div className="flex flex-col gap-5">

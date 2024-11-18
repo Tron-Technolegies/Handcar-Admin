@@ -6,7 +6,7 @@ export default function Graph() {
     <BarChart
       xAxis={[{ scaleType: "band", data: ["Jan", "Feb", "Mar", "Apr"] }]}
       series={[{ data: [500, 400, 600, 700], color: "#DB1215" }]}
-      width={500}
+      width={350}
       height={300}
     />
   );

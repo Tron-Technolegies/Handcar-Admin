@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AdminContext } from "../../../AdminContext";
 
 export default function ProductDescription() {
+  const { setShowDeletePopup } = useContext(AdminContext);
   return (
     <div className="my-10 flex flex-col gap-5">
       <h4 className="text-lg">Description</h4>
@@ -23,7 +25,10 @@ export default function ProductDescription() {
         >
           Edit
         </Link>
-        <button className="bg-red-600 px-4 py-2 rounded-md text-white">
+        <button
+          onClick={() => setShowDeletePopup(true)}
+          className="bg-red-600 px-4 py-2 rounded-md text-white"
+        >
           Delete
         </button>
       </div>

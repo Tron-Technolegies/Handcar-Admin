@@ -3,6 +3,7 @@ import { navItems } from "../../utils/NavItems";
 import NavItem from "./NavItem";
 import { NavLink, useLocation } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
+import { IoIosLogOut } from "react-icons/io";
 
 export default function SideBar() {
   const location = useLocation();
@@ -33,6 +34,10 @@ export default function SideBar() {
             location={location?.pathname}
           />
         ))}
+        <button className="flex items-center gap-3 px-3 py-2 rounded-lg text-[#6a6969] hover:text-black hover:bg-[#FAEBEB] ease-in-out duration-500">
+          <IoIosLogOut />
+          Logout
+        </button>
       </div>
     </div>
   );
