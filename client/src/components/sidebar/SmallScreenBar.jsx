@@ -6,6 +6,7 @@ import { navItems } from "../../utils/NavItems";
 import { RiCloseFill } from "react-icons/ri";
 import { AdminContext } from "../../AdminContext";
 import { motion } from "framer-motion";
+import { IoIosLogOut } from "react-icons/io";
 
 export default function SmallScreenBar() {
   const { setShowSmallBar } = useContext(AdminContext);
