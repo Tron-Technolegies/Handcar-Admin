@@ -10,6 +10,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { AdminContext } from "../../AdminContext";
+import useGetAllCategories from "../../hooks/category/useGetAllCategories";
 
 function createData(category) {
   return { category };
@@ -23,6 +24,9 @@ const rows = [
 ];
 
 export default function CategoryTable() {
+  const { loading, categories } = useGetAllCategories();
+  console.log(categories);
+
   const { setShowDeletePopup } = useContext(AdminContext);
   return (
     <TableContainer component={Paper}>
@@ -42,7 +46,7 @@ export default function CategoryTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, index) => (
+          {categories.map((row, index) => (
             <TableRow
               key={index}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -52,7 +56,7 @@ export default function CategoryTable() {
                 scope="row"
                 sx={{ width: "50%", textAlign: "center" }}
               >
-                {row.category}
+                {row.name}
               </TableCell>
               <TableCell sx={{ width: "50%", textAlign: "center" }}>
                 <div className="flex gap-5 justify-center text-xl text-[#ABABAB]">
