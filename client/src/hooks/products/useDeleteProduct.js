@@ -1,22 +1,19 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { toast } from "react-toastify";
 
-const useAddCategory = () => {
+const useDeleteProduct = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const addCategory = async ({ name }) => {
+  const deleteProduct = async ({ id }) => {
     setLoading(true);
     try {
-      const res = await axios.post(`http://192.168.1.72:8000/add_category`, {
-        name,
-      });
+      const res = await axios.delete("url");
       const data = res.data;
-      console.log(data);
-      toast.success("Category added successfully");
-      navigate("/category");
+      toast.success("Product deleted successfully");
+      navigate("/products");
     } catch (err) {
       toast.error(
         err?.response?.data?.msg || err?.error || "something went wrong"
@@ -25,7 +22,7 @@ const useAddCategory = () => {
       setLoading(false);
     }
   };
-  return { loading, addCategory };
+  return { loading, deleteProduct };
 };
 
-export default useAddCategory;
+export default useDeleteProduct;

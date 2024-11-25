@@ -1,0 +1,54 @@
+1. get all categories (include search functionality)
+2. Add a category
+3. get Single category
+4. Edit a Category
+5. Delete a category
+
+6. Get all brands (include search functionality)
+7. Add a Brand
+8. get Single Brand
+9. Edit a brand
+10. Delete a brand
+
+11. get List of all products(includes search, pagination, skip, limit)
+12. Add New Product(image upload included)
+13. Edit a product
+14. Get single Product
+15. Delete Product
+
+16. get all vendors (search functionality pagination)
+17. Add Vendor(includes password encryption)
+18. get single vendor
+19. Edit Vendor 
+20. Delete Vendor
+
+21. get All Subscribers (search functionality pagination)
+22. Add A subscriber (mapping location of vendor and assigning is here)
+
+23. get all logs (search functionality based on user and vendor, pagination)
+
+24. get all coupons
+25. Add coupon
+26. get single coupons
+27. edit coupon
+28. delete Coupon
+
+29. get all promoted products
+30. get all products based on search keyword
+31. add promoted product
+32. remove promoted product
+
+33. get promoted brand
+34. get all brands based on search
+35. add promoted brand
+36. remove promoted brand
+
+37. get all plans (with search and pagination)
+38. Add a plan
+39. Get single plan
+40. edit plan
+41. Delete plan
+
+42. login
+43. get user info
+44. logout

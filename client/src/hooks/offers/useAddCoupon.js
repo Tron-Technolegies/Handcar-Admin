@@ -1,22 +1,33 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { toast } from "react-toastify";
 
-const useAddCategory = () => {
+const useAddCoupon = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const addCategory = async ({ name }) => {
+  const addCoupon = async ({
+    name,
+    code,
+    discount,
+    start,
+    end,
+    description,
+  }) => {
     setLoading(true);
     try {
-      const res = await axios.post(`http://192.168.1.72:8000/add_category`, {
+      const res = await axios.post("url", {
         name,
+        code,
+        discount,
+        start,
+        end,
+        description,
       });
       const data = res.data;
-      console.log(data);
-      toast.success("Category added successfully");
-      navigate("/category");
+      toast.success("Coupon added successfully");
+      navigate("/offers");
     } catch (err) {
       toast.error(
         err?.response?.data?.msg || err?.error || "something went wrong"
@@ -25,7 +36,7 @@ const useAddCategory = () => {
       setLoading(false);
     }
   };
-  return { loading, addCategory };
+  return { loading, addCoupon };
 };
 
-export default useAddCategory;
+export default useAddCoupon;

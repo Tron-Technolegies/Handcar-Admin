@@ -1,22 +1,19 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { toast } from "react-toastify";
 
-const useAddCategory = () => {
+const useEditVendor = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const addCategory = async ({ name }) => {
+  const editVendor = async ({ name, email, phone, password, id }) => {
     setLoading(true);
     try {
-      const res = await axios.post(`http://192.168.1.72:8000/add_category`, {
-        name,
-      });
+      const res = await axios.patch("url", { name, email, phone, password });
       const data = res.data;
-      console.log(data);
-      toast.success("Category added successfully");
-      navigate("/category");
+      toast.success("Vendor updated successfully");
+      navigate("/services");
     } catch (err) {
       toast.error(
         err?.response?.data?.msg || err?.error || "something went wrong"
@@ -25,7 +22,7 @@ const useAddCategory = () => {
       setLoading(false);
     }
   };
-  return { loading, addCategory };
+  return { loading, editVendor };
 };
 
-export default useAddCategory;
+export default useEditVendor;

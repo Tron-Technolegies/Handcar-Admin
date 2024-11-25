@@ -2,15 +2,16 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-const useGetAllCategories = () => {
+const useGetAllCoupons = () => {
   const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState([]);
-  const getAllProducts = async () => {
+  const [coupons, setCoupons] = useState([]);
+
+  const getAllCoupons = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`http://192.168.1.72:8000/view_category`);
+      const res = await axios.get("url");
       const data = res.data;
-      setCategories(data.categories);
+      setCoupons(data.coupons);
     } catch (err) {
       toast.error(
         err?.response?.data?.msg || err?.error || "something went wrong"
@@ -20,9 +21,10 @@ const useGetAllCategories = () => {
     }
   };
   useEffect(() => {
-    getAllProducts();
+    getAllCoupons();
   }, []);
-  return { loading, categories };
+
+  return { loading, coupons };
 };
 
-export default useGetAllCategories;
+export default useGetAllCoupons;
