@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { base_url } from "../../constants";
 
 const useAddCategory = () => {
   const [loading, setLoading] = useState(false);
@@ -10,7 +11,7 @@ const useAddCategory = () => {
   const addCategory = async ({ name }) => {
     setLoading(true);
     try {
-      const res = await axios.post(`http://192.168.1.72:8000/add_category`, {
+      const res = await axios.post(`${base_url}/add_category`, {
         name,
       });
       const data = res.data;

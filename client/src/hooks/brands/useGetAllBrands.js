@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { base_url } from "../../constants";
 
 const useGetAllBrands = () => {
   const [loading, setLoading] = useState(false);
@@ -9,7 +10,7 @@ const useGetAllBrands = () => {
   const getAllBrands = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("url");
+      const res = await axios.get(`${base_url}/view_brand`);
       const data = res.data;
       setBrands(data.brands);
     } catch (err) {

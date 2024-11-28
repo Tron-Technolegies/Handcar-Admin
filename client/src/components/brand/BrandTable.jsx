@@ -10,6 +10,8 @@ import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { AdminContext } from "../../AdminContext";
+import useGetAllBrands from "../../hooks/brands/useGetAllBrands";
+import Loading from "../Loading";
 
 function createData(brand) {
   return { brand };
@@ -24,7 +26,11 @@ const rows = [
 
 export default function BrandTable() {
   const { setShowDeletePopup } = useContext(AdminContext);
-  return (
+  const { loading, brands } = useGetAllBrands();
+
+  return loading ? (
+    <Loading />
+  ) : (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
@@ -42,9 +48,9 @@ export default function BrandTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, index) => (
+          {brands.map((row, index) => (
             <TableRow
-              key={index}
+              key={row.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell
@@ -52,7 +58,7 @@ export default function BrandTable() {
                 scope="row"
                 sx={{ width: "50%", textAlign: "center" }}
               >
-                {row.brand}
+                {row.name}
               </TableCell>
               <TableCell sx={{ width: "50%", textAlign: "center" }}>
                 <div className="flex gap-5 justify-center text-xl text-[#ABABAB]">
