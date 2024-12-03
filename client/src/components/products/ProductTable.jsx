@@ -10,6 +10,8 @@ import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { AdminContext } from "../../AdminContext";
+import useGetAllProducts from "../../hooks/products/useGetAllProducts";
+import Loading from "../Loading";
 
 function createData(product, stock, price) {
   return { product, stock, price };
@@ -62,7 +64,10 @@ const rows = [
 
 export default function ProductTable() {
   const { setShowDeletePopup } = useContext(AdminContext);
-  return (
+  const { loading, products } = useGetAllProducts();
+  return loading ? (
+    <Loading />
+  ) : (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
@@ -90,9 +95,9 @@ export default function ProductTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {products?.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell
@@ -100,10 +105,23 @@ export default function ProductTable() {
                 scope="row"
                 sx={{ width: "40%", textAlign: "center" }}
               >
-                {row.product}
+                <Link
+                  to={`/products/${row.id}`}
+                  className="flex gap-2 items-center w-fit"
+                >
+                  <img
+                    src={row.image}
+                    className="w-[50px] h-[50px] rounded-md"
+                  ></img>
+                  <div className="flex items-start flex-col gap-1">
+                    <p className="font-medium">{row.name}</p>
+                    <p className="text-sm text-[#7D7D7D]">Model No</p>
+                  </div>
+                </Link>
+                ,
               </TableCell>
               <TableCell sx={{ width: "20%", textAlign: "center" }}>
-                {row.stock}
+                {row.category}
               </TableCell>
               <TableCell sx={{ width: "20%", textAlign: "center" }}>
                 {row.price}

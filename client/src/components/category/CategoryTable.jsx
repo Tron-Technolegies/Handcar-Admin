@@ -11,24 +11,15 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { AdminContext } from "../../AdminContext";
 import useGetAllCategories from "../../hooks/category/useGetAllCategories";
-
-function createData(category) {
-  return { category };
-}
-
-const rows = [
-  createData("Category 1"),
-  createData("Category 2"),
-  createData("Category 3"),
-  createData("Category 4"),
-];
+import Loading from "../Loading";
 
 export default function CategoryTable() {
   const { loading, categories } = useGetAllCategories();
-  console.log(categories);
 
   const { setShowDeletePopup } = useContext(AdminContext);
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
@@ -60,7 +51,7 @@ export default function CategoryTable() {
               </TableCell>
               <TableCell sx={{ width: "50%", textAlign: "center" }}>
                 <div className="flex gap-5 justify-center text-xl text-[#ABABAB]">
-                  <Link to={"/category/1/edit"}>
+                  <Link to={`/category/${row.id}/edit`}>
                     <FaRegEdit />
                   </Link>
                   <button onClick={() => setShowDeletePopup(true)}>

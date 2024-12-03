@@ -13,17 +13,6 @@ import { AdminContext } from "../../AdminContext";
 import useGetAllBrands from "../../hooks/brands/useGetAllBrands";
 import Loading from "../Loading";
 
-function createData(brand) {
-  return { brand };
-}
-
-const rows = [
-  createData("Brand 1"),
-  createData("Brand 2"),
-  createData("Brand 3"),
-  createData("Brand 4"),
-];
-
 export default function BrandTable() {
   const { setShowDeletePopup } = useContext(AdminContext);
   const { loading, brands } = useGetAllBrands();
@@ -62,7 +51,7 @@ export default function BrandTable() {
               </TableCell>
               <TableCell sx={{ width: "50%", textAlign: "center" }}>
                 <div className="flex gap-5 justify-center text-xl text-[#ABABAB]">
-                  <Link to={"/brand/1/edit"}>
+                  <Link to={`/brand/${row.id}/edit`}>
                     <FaRegEdit />
                   </Link>
                   <button onClick={() => setShowDeletePopup(true)}>

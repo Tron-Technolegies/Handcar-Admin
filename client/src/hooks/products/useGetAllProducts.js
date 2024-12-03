@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { base_url } from "../../constants";
 
 const useGetAllProducts = () => {
   const [loading, setLoading] = useState(false);
@@ -9,9 +10,9 @@ const useGetAllProducts = () => {
   const getAllProducts = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("url");
+      const res = await axios.get(`${base_url}/view_products`);
       const data = res.data;
-      setProducts(data.products);
+      setProducts(data.product);
     } catch (err) {
       toast.error(
         err?.response?.data?.msg || err?.error || "something went wrong"
