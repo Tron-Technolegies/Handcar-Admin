@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { base_url } from "../../constants";
 
 const useAddCoupon = () => {
   const [loading, setLoading] = useState(false);
@@ -17,12 +18,12 @@ const useAddCoupon = () => {
   }) => {
     setLoading(true);
     try {
-      const res = await axios.post("url", {
+      const res = await axios.post(`${base_url}/add_coupon`, {
         name,
-        code,
-        discount,
-        start,
-        end,
+        coupon_code: code,
+        discount_percentage: discount,
+        start_date: start,
+        end_date: end,
         description,
       });
       const data = res.data;

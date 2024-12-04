@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import FormInput from "../../FormInput";
+import useEditVendor from "../../../hooks/vendors/useEditVendor";
+import Loading from "../../Loading";
+import { useParams } from "react-router-dom";
 
 export default function EditVendorForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const { id } = useParams();
+  const { loading, editVendor } = useEditVendor();
   return (
     <div>
       <FormInput
@@ -47,9 +52,13 @@ export default function EditVendorForm() {
         onchange={(e) => setPassword(e.target.value)}
       />
       <div className="flex justify-end">
-        <button className="px-4 py-2 bg-black text-white rounded-lg">
+        <button
+          onClick={() => editVendor({ name, email, password, phone, id })}
+          className="px-4 py-2 bg-black text-white rounded-lg"
+        >
           Update Vendor
         </button>
+        {loading && <Loading />}
       </div>
     </div>
   );

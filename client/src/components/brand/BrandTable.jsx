@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -14,8 +14,13 @@ import useGetAllBrands from "../../hooks/brands/useGetAllBrands";
 import Loading from "../Loading";
 
 export default function BrandTable() {
-  const { setShowDeletePopup } = useContext(AdminContext);
-  const { loading, brands } = useGetAllBrands();
+  const { setShowDeletePopup, setDeleteId, setDeleteType, refetchTrigger } =
+    useContext(AdminContext);
+  const { loading, brands, refetch } = useGetAllBrands();
+
+  useEffect(() => {
+    refetch();
+  }, [refetchTrigger]);
 
   return loading ? (
     <Loading />
@@ -54,7 +59,13 @@ export default function BrandTable() {
                   <Link to={`/brand/${row.id}/edit`}>
                     <FaRegEdit />
                   </Link>
-                  <button onClick={() => setShowDeletePopup(true)}>
+                  <button
+                    onClick={() => {
+                      setShowDeletePopup(true);
+                      setDeleteId(row.id);
+                      setDeleteType("brand");
+                    }}
+                  >
                     <RiDeleteBin6Line />
                   </button>
                 </div>

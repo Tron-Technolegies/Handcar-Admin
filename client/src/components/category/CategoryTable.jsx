@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -14,9 +14,14 @@ import useGetAllCategories from "../../hooks/category/useGetAllCategories";
 import Loading from "../Loading";
 
 export default function CategoryTable() {
-  const { loading, categories } = useGetAllCategories();
+  const { loading, categories, refetch } = useGetAllCategories();
 
-  const { setShowDeletePopup } = useContext(AdminContext);
+  const { setShowDeletePopup, setDeleteId, setDeleteType, refetchTrigger } =
+    useContext(AdminContext);
+
+  useEffect(() => {
+    refetch();
+  }, [refetchTrigger]);
   return loading ? (
     <Loading />
   ) : (
@@ -54,7 +59,13 @@ export default function CategoryTable() {
                   <Link to={`/category/${row.id}/edit`}>
                     <FaRegEdit />
                   </Link>
-                  <button onClick={() => setShowDeletePopup(true)}>
+                  <button
+                    onClick={() => {
+                      setShowDeletePopup(true);
+                      setDeleteId(row.id);
+                      setDeleteType("category");
+                    }}
+                  >
                     <RiDeleteBin6Line />
                   </button>
                 </div>

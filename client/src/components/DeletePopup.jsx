@@ -1,7 +1,56 @@
-import React from "react";
+import React, { useContext } from "react";
 import { motion } from "framer-motion";
+import { AdminContext } from "../AdminContext";
+import useDeleteCategory from "../hooks/category/useDeleteCategory";
+import Loading from "./Loading";
+import useDeleteBrand from "../hooks/brands/useDeleteBrand";
+import useDeleteVendor from "../hooks/vendors/useDeleteVendor";
+import useDeleteCoupon from "../hooks/offers/useDeleteCoupon";
 
 export default function DeletePopup({ setPopup }) {
+  const {
+    deleteId,
+    setDeleteId,
+    deleteType,
+    setDeleteType,
+    setRefetchTrigger,
+    refetchTrigger,
+  } = useContext(AdminContext);
+  const { loading, deleteCategory } = useDeleteCategory();
+  const { loading: brandLoading, deleteBrand } = useDeleteBrand();
+  const { loading: vendorLoading, deleteVendor } = useDeleteVendor();
+  const { loading: couponLoading, deleteCoupon } = useDeleteCoupon();
+
+  async function handleDelete() {
+    if (deleteType === "category") {
+      await deleteCategory({ id: deleteId });
+      setDeleteId("");
+      setPopup(false);
+      setRefetchTrigger(!refetchTrigger);
+      setDeleteType("");
+    }
+    if (deleteType === "brand") {
+      await deleteBrand({ id: deleteId });
+      setDeleteId("");
+      setPopup(false);
+      setRefetchTrigger(!refetchTrigger);
+      setDeleteType("");
+    }
+    if (deleteType === "vendor") {
+      await deleteVendor({ id: deleteId });
+      setDeleteId("");
+      setPopup(false);
+      setRefetchTrigger(!refetchTrigger);
+      setDeleteType("");
+    }
+    if (deleteType === "coupon") {
+      await deleteCoupon({ id: deleteId });
+      setDeleteId("");
+      setPopup(false);
+      setRefetchTrigger(!refetchTrigger);
+      setDeleteType("");
+    }
+  }
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -24,14 +73,25 @@ export default function DeletePopup({ setPopup }) {
         <div className="flex justify-center items-center gap-7 w-full">
           <button
             className="px-4 py-2 rounded-lg bg-[#FCFCFC] border border-[#8F8F8F]"
-            onClick={() => setPopup(false)}
+            onClick={() => {
+              setPopup(false);
+              setDeleteId("");
+              setDeleteType("");
+            }}
           >
             Cancel
           </button>
-          <button className="px-4 py-2 rounded-lg bg-[#DB1215] border border-[#8F8F8F] text-white">
+          <button
+            onClick={handleDelete}
+            className="px-4 py-2 rounded-lg bg-[#DB1215] border border-[#8F8F8F] text-white"
+          >
             Delete
           </button>
         </div>
+        {loading && <Loading />}
+        {brandLoading && <Loading />}
+        {vendorLoading && <Loading />}
+        {couponLoading && <Loading />}
       </motion.div>
     </motion.div>
   );

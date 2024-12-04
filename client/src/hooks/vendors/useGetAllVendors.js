@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { base_url } from "../../constants";
 
 const useGetAllVendors = () => {
   const [loading, setLoading] = useState(false);
@@ -9,9 +10,9 @@ const useGetAllVendors = () => {
   const getAllVendors = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("url");
+      const res = await axios.get(`${base_url}/view_vendors`);
       const data = res.data;
-      setVendors(data.vendors);
+      setVendors(data.vendor);
     } catch (err) {
       toast.error(
         err?.response?.data?.msg || err?.error || "something went wrong"
@@ -25,7 +26,10 @@ const useGetAllVendors = () => {
     getAllVendors();
   }, []);
 
-  return { loading, vendors };
+  const refetch = () => {
+    getAllVendors();
+  };
+  return { loading, vendors, refetch };
 };
 
 export default useGetAllVendors;

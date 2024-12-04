@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { base_url } from "../../constants";
 
 const useEditCoupon = () => {
   const [loading, setLoading] = useState(false);
@@ -18,12 +19,12 @@ const useEditCoupon = () => {
   }) => {
     setLoading(true);
     try {
-      const res = await axios.patch("url", {
+      const res = await axios.put(`${base_url}/edit_coupons/${id}/`, {
         name,
-        code,
-        discount,
-        start,
-        end,
+        coupon_code: code,
+        discount_percentage: discount,
+        start_date: start,
+        end_date: end,
         description,
       });
       const data = res.data;

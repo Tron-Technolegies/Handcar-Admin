@@ -12,7 +12,7 @@ const useAddPlan = () => {
     try {
       const res = await axios.post("url", {
         name,
-        type,
+        service_type: type,
         duration,
         price,
         description,

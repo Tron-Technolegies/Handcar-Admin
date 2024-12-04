@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { base_url } from "../../constants";
 
 const useEditBrand = () => {
   const [loading, setLoading] = useState(false);
@@ -9,8 +10,12 @@ const useEditBrand = () => {
 
   const editBrand = async ({ id, name }) => {
     setLoading(true);
+    const formData = new FormData();
+    formData.append("name", name);
     try {
-      const res = await axios.patch("url", { name });
+      const res = await axios.post(`${base_url}/edit_brand/${id}/`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       const data = res.data;
       toast.success("Brand updated successfully");
       navigate("/brand");

@@ -25,7 +25,11 @@ const useGetAllBrands = () => {
     getAllBrands();
   }, []);
 
-  return { loading, brands };
+  const refetch = () => {
+    getAllBrands();
+  };
+
+  return { loading, brands, refetch };
 };
 
 export default useGetAllBrands;

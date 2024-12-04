@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import { base_url } from "../../constants";
 
 const useDeleteVendor = () => {
   const [loading, setLoading] = useState("");
@@ -8,7 +9,7 @@ const useDeleteVendor = () => {
   const deleteVendor = async ({ id }) => {
     setLoading(true);
     try {
-      const res = await axios.delete("url");
+      const res = await axios.delete(`${base_url}/delete_vendor/${id}/`);
       const data = res.data;
       toast.success("Vendor successfully deleted");
     } catch (err) {

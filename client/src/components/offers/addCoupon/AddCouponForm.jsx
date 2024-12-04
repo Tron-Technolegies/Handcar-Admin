@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import FormInput from "../../FormInput";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import useAddCoupon from "../../../hooks/offers/useAddCoupon";
+import Loading from "../../Loading";
 
 export default function AddCouponForm() {
   const [name, setName] = useState("");
@@ -8,6 +12,7 @@ export default function AddCouponForm() {
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
   const [description, setDescription] = useState("");
+  const { loading, addCoupon } = useAddCoupon();
   return (
     <div>
       <FormInput
@@ -45,18 +50,24 @@ export default function AddCouponForm() {
       />
       <div className="flex flex-col mb-3">
         <label className="text-sm mb-3">Description</label>
-        <textarea
-          rows={7}
+        <ReactQuill
+          theme="snow"
           placeholder="Enter your description"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(value) => setDescription(value)}
           className="px-3 py-2 bg-[#F5F5F5] rounded-lg border border-gray-300 text-gray-900"
-        ></textarea>
+        />
       </div>
       <div className="flex justify-end">
-        <button className="px-4 py-2 rounded-lg  bg-black text-white">
+        <button
+          onClick={() =>
+            addCoupon({ name, description, code, discount, start, end })
+          }
+          className="px-4 py-2 rounded-lg  bg-black text-white"
+        >
           Save Coupon
         </button>
+        {loading && <Loading />}
       </div>
     </div>
   );

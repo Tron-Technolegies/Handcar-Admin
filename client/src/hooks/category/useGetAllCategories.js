@@ -24,7 +24,11 @@ const useGetAllCategories = () => {
   useEffect(() => {
     getAllProducts();
   }, []);
-  return { loading, categories };
+
+  const refetch = () => {
+    getAllProducts();
+  };
+  return { loading, categories, refetch };
 };
 
 export default useGetAllCategories;

@@ -10,20 +10,10 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaRegEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AdminContext } from "../../AdminContext";
-
-function createData(planName, serviceType, Duration, price) {
-  return { planName, serviceType, Duration, price };
-}
-
-const rows = [
-  createData("Basic", "Car wash", "6 months", "$ 100"),
-  createData("Premium", "Maintenance", "6 months", "$ 100"),
-  createData("Luxuary", "Car wash", "6 months", "$ 100"),
-  createData("Basic", "Car wash", "6 months", "$ 100"),
-  createData("Basic", "Car wash", "6 months", "$ 100"),
-];
+import useGetAllPlans from "../../hooks/plans/useGetAllPlans";
 
 export default function PlanTable() {
+  const { loading, plans } = useGetAllPlans();
   const { setShowDeletePopup } = useContext(AdminContext);
   return (
     <TableContainer component={Paper}>
@@ -58,7 +48,7 @@ export default function PlanTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, index) => (
+          {plans.map((row, index) => (
             <TableRow
               key={index}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

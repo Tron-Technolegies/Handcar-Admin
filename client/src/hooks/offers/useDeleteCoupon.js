@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { base_url } from "../../constants";
 
 const useDeleteCoupon = () => {
   const [loading, setLoading] = useState("");
@@ -10,7 +11,7 @@ const useDeleteCoupon = () => {
   const deleteCoupon = async ({ id }) => {
     setLoading(true);
     try {
-      const res = await axios.delete("url");
+      const res = await axios.delete(`${base_url}/delete_coupons/${id}/`);
       const data = res.data;
       toast.success("coupon deleted successfully");
       navigate("/offers");

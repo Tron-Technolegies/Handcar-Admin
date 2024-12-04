@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import FormInput from "../../FormInput";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import useAddVendor from "../../../hooks/vendors/useAddVendor";
+import Loading from "../../Loading";
 
 export default function AddVendorForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+
+  const { loading, addVendor } = useAddVendor();
   return (
     <div>
       <FormInput
@@ -47,9 +51,13 @@ export default function AddVendorForm() {
         onchange={(e) => setPassword(e.target.value)}
       />
       <div className="flex justify-end">
-        <button className="px-4 py-2 bg-black text-white rounded-lg">
+        <button
+          onClick={() => addVendor({ name, email, phone, password })}
+          className="px-4 py-2 bg-black text-white rounded-lg"
+        >
           Create Vendor
         </button>
+        {loading && <Loading />}
       </div>
     </div>
   );

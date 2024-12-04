@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -10,21 +10,20 @@ import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { AdminContext } from "../../AdminContext";
-
-function createData(vendor, joined, location) {
-  return { vendor, joined, location };
-}
-
-const rows = [
-  createData("Tom Cruise", "10/10/2024", "UAE"),
-  createData("Tom Brady", "10/10/2024", "America"),
-  createData("Angelina", "10/10/2024", "England"),
-  createData("Tom Cruise", "10/10/2024", "Australia"),
-];
+import useGetAllVendors from "../../hooks/vendors/useGetAllVendors";
+import Loading from "../Loading";
 
 export default function VendorTable() {
-  const { setShowDeletePopup } = useContext(AdminContext);
-  return (
+  const { setShowDeletePopup, setDeleteId, setDeleteType, refetchTrigger } =
+    useContext(AdminContext);
+  const { loading, vendors, refetch } = useGetAllVendors();
+
+  useEffect(() => {
+    refetch();
+  }, [refetchTrigger]);
+  return loading ? (
+    <Loading />
+  ) : (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
@@ -52,9 +51,9 @@ export default function VendorTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, index) => (
+          {vendors.map((row, index) => (
             <TableRow
-              key={index}
+              key={row.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell
@@ -62,20 +61,26 @@ export default function VendorTable() {
                 scope="row"
                 sx={{ width: "25%", textAlign: "center" }}
               >
-                {row.vendor}
+                {row.name}
               </TableCell>
               <TableCell sx={{ width: "25%", textAlign: "center" }}>
-                {row.joined}
+                {row.price}
               </TableCell>
               <TableCell sx={{ width: "25%", textAlign: "center" }}>
-                {row.location}
+                {row.location ? row.location : "N/A"}
               </TableCell>
               <TableCell sx={{ width: "25%", textAlign: "center" }}>
                 <div className="flex gap-5 justify-center text-xl text-[#ABABAB]">
-                  <Link to={"/services/1/edit"}>
+                  <Link to={`/services/${row.id}/edit`}>
                     <FaRegEdit />
                   </Link>
-                  <button onClick={() => setShowDeletePopup(true)}>
+                  <button
+                    onClick={() => {
+                      setShowDeletePopup(true);
+                      setDeleteId(row.id);
+                      setDeleteType("vendor");
+                    }}
+                  >
                     <RiDeleteBin6Line />
                   </button>
                 </div>
