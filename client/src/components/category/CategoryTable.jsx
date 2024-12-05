@@ -13,8 +13,8 @@ import { AdminContext } from "../../AdminContext";
 import useGetAllCategories from "../../hooks/category/useGetAllCategories";
 import Loading from "../Loading";
 
-export default function CategoryTable() {
-  const { loading, categories, refetch } = useGetAllCategories();
+export default function CategoryTable({ search }) {
+  const { loading, categories, refetch } = useGetAllCategories({ search });
 
   const { setShowDeletePopup, setDeleteId, setDeleteType, refetchTrigger } =
     useContext(AdminContext);

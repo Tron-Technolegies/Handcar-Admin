@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -62,9 +62,13 @@ const rows = [
   ),
 ];
 
-export default function ProductTable() {
-  const { setShowDeletePopup } = useContext(AdminContext);
-  const { loading, products } = useGetAllProducts();
+export default function ProductTable({ search }) {
+  const { setShowDeletePopup, refetchTrigger } = useContext(AdminContext);
+  const { loading, products, refetch } = useGetAllProducts({ search });
+
+  useEffect(() => {
+    refetch();
+  }, [refetchTrigger]);
   return loading ? (
     <Loading />
   ) : (

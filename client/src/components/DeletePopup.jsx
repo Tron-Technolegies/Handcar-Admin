@@ -6,6 +6,7 @@ import Loading from "./Loading";
 import useDeleteBrand from "../hooks/brands/useDeleteBrand";
 import useDeleteVendor from "../hooks/vendors/useDeleteVendor";
 import useDeleteCoupon from "../hooks/offers/useDeleteCoupon";
+import useRemovePlan from "../hooks/plans/useRemovePlan";
 
 export default function DeletePopup({ setPopup }) {
   const {
@@ -20,6 +21,7 @@ export default function DeletePopup({ setPopup }) {
   const { loading: brandLoading, deleteBrand } = useDeleteBrand();
   const { loading: vendorLoading, deleteVendor } = useDeleteVendor();
   const { loading: couponLoading, deleteCoupon } = useDeleteCoupon();
+  const { loading: planLoading, removePlan } = useRemovePlan();
 
   async function handleDelete() {
     if (deleteType === "category") {
@@ -45,6 +47,13 @@ export default function DeletePopup({ setPopup }) {
     }
     if (deleteType === "coupon") {
       await deleteCoupon({ id: deleteId });
+      setDeleteId("");
+      setPopup(false);
+      setRefetchTrigger(!refetchTrigger);
+      setDeleteType("");
+    }
+    if (deleteType === "plan") {
+      await removePlan({ id: deleteId });
       setDeleteId("");
       setPopup(false);
       setRefetchTrigger(!refetchTrigger);
@@ -92,6 +101,7 @@ export default function DeletePopup({ setPopup }) {
         {brandLoading && <Loading />}
         {vendorLoading && <Loading />}
         {couponLoading && <Loading />}
+        {planLoading && <Loading />}
       </motion.div>
     </motion.div>
   );

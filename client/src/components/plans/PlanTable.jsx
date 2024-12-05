@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,11 +11,19 @@ import { FaRegEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AdminContext } from "../../AdminContext";
 import useGetAllPlans from "../../hooks/plans/useGetAllPlans";
+import Loading from "../Loading";
 
 export default function PlanTable() {
-  const { loading, plans } = useGetAllPlans();
-  const { setShowDeletePopup } = useContext(AdminContext);
-  return (
+  const { loading, plans, refetch } = useGetAllPlans();
+  const { setShowDeletePopup, setDeleteId, setDeleteType, refetchTrigger } =
+    useContext(AdminContext);
+
+  useEffect(() => {
+    refetch();
+  }, [refetchTrigger]);
+  return loading ? (
+    <Loading />
+  ) : (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
@@ -50,7 +58,7 @@ export default function PlanTable() {
         <TableBody>
           {plans.map((row, index) => (
             <TableRow
-              key={index}
+              key={row.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell
@@ -58,23 +66,29 @@ export default function PlanTable() {
                 scope="row"
                 sx={{ width: "20%", textAlign: "center" }}
               >
-                {row.planName}
+                {row.name}
               </TableCell>
               <TableCell sx={{ width: "20%", textAlign: "center" }}>
-                {row.serviceType}
+                {row.service_type}
               </TableCell>
               <TableCell sx={{ width: "20%", textAlign: "center" }}>
-                {row.Duration}
+                {row.duration} months
               </TableCell>
               <TableCell sx={{ width: "20%", textAlign: "center" }}>
                 {row.price}
               </TableCell>
               <TableCell sx={{ width: "20%", textAlign: "center" }}>
                 <div className="flex gap-5 justify-center text-xl text-[#ABABAB]">
-                  <Link to={"/plans/1/edit"}>
+                  <Link to={`/plans/${row.id}/edit`}>
                     <FaRegEdit />
                   </Link>
-                  <button onClick={() => setShowDeletePopup(true)}>
+                  <button
+                    onClick={() => {
+                      setShowDeletePopup(true);
+                      setDeleteId(row.id);
+                      setDeleteType("plan");
+                    }}
+                  >
                     <RiDeleteBin6Line />
                   </button>
                 </div>

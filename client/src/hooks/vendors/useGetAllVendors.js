@@ -3,14 +3,18 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { base_url } from "../../constants";
 
-const useGetAllVendors = () => {
+const useGetAllVendors = ({ search }) => {
   const [loading, setLoading] = useState(false);
   const [vendors, setVendors] = useState([]);
 
   const getAllVendors = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${base_url}/view_vendors`);
+      const res = await axios.get(`${base_url}/view_vendors`, {
+        params: {
+          search,
+        },
+      });
       const data = res.data;
       setVendors(data.vendor);
     } catch (err) {

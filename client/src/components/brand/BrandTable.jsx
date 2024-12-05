@@ -13,10 +13,10 @@ import { AdminContext } from "../../AdminContext";
 import useGetAllBrands from "../../hooks/brands/useGetAllBrands";
 import Loading from "../Loading";
 
-export default function BrandTable() {
+export default function BrandTable({ search }) {
   const { setShowDeletePopup, setDeleteId, setDeleteType, refetchTrigger } =
     useContext(AdminContext);
-  const { loading, brands, refetch } = useGetAllBrands();
+  const { loading, brands, refetch } = useGetAllBrands({ search });
 
   useEffect(() => {
     refetch();

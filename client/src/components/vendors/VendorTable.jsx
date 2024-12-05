@@ -13,10 +13,10 @@ import { AdminContext } from "../../AdminContext";
 import useGetAllVendors from "../../hooks/vendors/useGetAllVendors";
 import Loading from "../Loading";
 
-export default function VendorTable() {
+export default function VendorTable({ search }) {
   const { setShowDeletePopup, setDeleteId, setDeleteType, refetchTrigger } =
     useContext(AdminContext);
-  const { loading, vendors, refetch } = useGetAllVendors();
+  const { loading, vendors, refetch } = useGetAllVendors({ search });
 
   useEffect(() => {
     refetch();
