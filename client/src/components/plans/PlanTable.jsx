@@ -13,8 +13,8 @@ import { AdminContext } from "../../AdminContext";
 import useGetAllPlans from "../../hooks/plans/useGetAllPlans";
 import Loading from "../Loading";
 
-export default function PlanTable() {
-  const { loading, plans, refetch } = useGetAllPlans();
+export default function PlanTable({ search }) {
+  const { loading, plans, refetch } = useGetAllPlans({ search });
   const { setShowDeletePopup, setDeleteId, setDeleteType, refetchTrigger } =
     useContext(AdminContext);
 

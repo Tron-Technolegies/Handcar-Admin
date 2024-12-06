@@ -9,4 +9,3 @@ get single vendor absent.
 
 missing get single coupon
 missing get single plan
-search problem of vendors

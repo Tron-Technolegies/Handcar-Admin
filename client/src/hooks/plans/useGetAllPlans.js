@@ -4,14 +4,18 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { base_url } from "../../constants";
 
-const useGetAllPlans = () => {
+const useGetAllPlans = ({ search }) => {
   const [loading, setLoading] = useState(false);
   const [plans, setPlans] = useState([]);
 
   const getAllPlans = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${base_url}/view_plans`);
+      const res = await axios.get(`${base_url}/view_plans`, {
+        params: {
+          search,
+        },
+      });
       const data = res.data;
       setPlans(data.plan);
     } catch (err) {
