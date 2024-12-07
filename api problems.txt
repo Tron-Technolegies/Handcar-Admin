@@ -9,3 +9,12 @@ get single vendor absent.
 
 missing get single coupon
 missing get single plan
+
+in promoted products search only show products that are not promoted
+in promoted brands search only show brands that are not promoted
+
+view subscribers
+
+log section view
+
+authentication

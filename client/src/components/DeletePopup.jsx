@@ -7,6 +7,8 @@ import useDeleteBrand from "../hooks/brands/useDeleteBrand";
 import useDeleteVendor from "../hooks/vendors/useDeleteVendor";
 import useDeleteCoupon from "../hooks/offers/useDeleteCoupon";
 import useRemovePlan from "../hooks/plans/useRemovePlan";
+import useRemovePromotedProduct from "../hooks/promotions/useRemovePromotedProduct";
+import useRemovePromotedBrand from "../hooks/promotions/useRemovePromotedBrand";
 
 export default function DeletePopup({ setPopup }) {
   const {
@@ -22,6 +24,10 @@ export default function DeletePopup({ setPopup }) {
   const { loading: vendorLoading, deleteVendor } = useDeleteVendor();
   const { loading: couponLoading, deleteCoupon } = useDeleteCoupon();
   const { loading: planLoading, removePlan } = useRemovePlan();
+  const { loading: promotedProductLoading, removePromotedProduct } =
+    useRemovePromotedProduct();
+  const { loading: promotedBrandLoading, removePromotedBrand } =
+    useRemovePromotedBrand();
 
   async function handleDelete() {
     if (deleteType === "category") {
@@ -54,6 +60,20 @@ export default function DeletePopup({ setPopup }) {
     }
     if (deleteType === "plan") {
       await removePlan({ id: deleteId });
+      setDeleteId("");
+      setPopup(false);
+      setRefetchTrigger(!refetchTrigger);
+      setDeleteType("");
+    }
+    if (deleteType === "promotedproduct") {
+      await removePromotedProduct({ id: deleteId });
+      setDeleteId("");
+      setPopup(false);
+      setRefetchTrigger(!refetchTrigger);
+      setDeleteType("");
+    }
+    if (deleteType === "promotedbrand") {
+      await removePromotedBrand({ id: deleteId });
       setDeleteId("");
       setPopup(false);
       setRefetchTrigger(!refetchTrigger);
@@ -102,6 +122,8 @@ export default function DeletePopup({ setPopup }) {
         {vendorLoading && <Loading />}
         {couponLoading && <Loading />}
         {planLoading && <Loading />}
+        {promotedProductLoading && <Loading />}
+        {promotedBrandLoading && <Loading />}
       </motion.div>
     </motion.div>
   );

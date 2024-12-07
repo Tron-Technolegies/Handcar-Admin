@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { base_url } from "../../constants";
 
 const useAssignPromotedProduct = () => {
   const [loading, setLoading] = useState(false);
@@ -10,7 +11,9 @@ const useAssignPromotedProduct = () => {
   const assignPromotedProduct = async ({ id }) => {
     setLoading(true);
     try {
-      const res = await axios.patch("url");
+      const res = await axios.post(`${base_url}/promote_product`, {
+        product_id: id,
+      });
       const data = res.data;
       toast.success("Product Successfully Promoted");
     } catch (err) {

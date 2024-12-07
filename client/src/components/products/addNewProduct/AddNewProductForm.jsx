@@ -8,8 +8,8 @@ import useAddProduct from "../../../hooks/products/useAddProduct";
 import useAddProductImage from "../../../hooks/products/useAddProductImage";
 
 export default function AddNewProductForm() {
-  const { categories } = useGetAllCategories();
-  const { brands } = useGetAllBrands();
+  const { categories } = useGetAllCategories({ search: "" });
+  const { brands } = useGetAllBrands({ search: "" });
   const { loading, addProduct } = useAddProduct();
   const { addImage, data } = useAddProductImage();
   const [name, setName] = useState("");
