@@ -18,3 +18,5 @@ view subscribers
 log section view
 
 authentication
+
+search functionality of users
