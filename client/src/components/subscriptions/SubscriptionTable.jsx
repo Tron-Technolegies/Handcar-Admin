@@ -7,52 +7,15 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { GoDotFill } from "react-icons/go";
-
-function createData(name, service, plan, duration, start, end, status) {
-  return { name, service, plan, duration, start, end, status };
-}
-
-const rows = [
-  createData(
-    "Tom Cruise",
-    "Car wash",
-    "Premium",
-    "6 months",
-    "01/10/2024",
-    "01/10/2024",
-    "active"
-  ),
-  createData(
-    "Tom Cruise",
-    "Car wash",
-    "Premium",
-    "6 months",
-    "01/10/2024",
-    "01/10/2024",
-    "inactive"
-  ),
-  createData(
-    "Tom Cruise",
-    "Car wash",
-    "Premium",
-    "6 months",
-    "01/10/2024",
-    "01/10/2024",
-    "active"
-  ),
-  createData(
-    "Tom Cruise",
-    "Car wash",
-    "Premium",
-    "6 months",
-    "01/10/2024",
-    "01/10/2024",
-    "inactive"
-  ),
-];
+import useGetAllSubscriptions from "../../hooks/subscriptions/useGetAllSubscriptions";
+import Loading from "../Loading";
 
 export default function SubscriptionTable() {
-  return (
+  const { loading, subs } = useGetAllSubscriptions();
+
+  return loading ? (
+    <Loading />
+  ) : (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
@@ -60,7 +23,7 @@ export default function SubscriptionTable() {
             <TableCell
               sx={{ width: "16%", textAlign: "center", fontWeight: "bold" }}
             >
-              Name
+              Email
             </TableCell>
             <TableCell
               sx={{ width: "14%", textAlign: "center", fontWeight: "bold" }}
@@ -95,7 +58,7 @@ export default function SubscriptionTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, index) => (
+          {subs.map((row, index) => (
             <TableRow
               key={index}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -105,10 +68,10 @@ export default function SubscriptionTable() {
                 scope="row"
                 sx={{ width: "16%", textAlign: "center" }}
               >
-                {row.name}
+                {row.email}
               </TableCell>
               <TableCell sx={{ width: "14%", textAlign: "center" }}>
-                {row.service}
+                {row.service_type}
               </TableCell>
               <TableCell sx={{ width: "14%", textAlign: "center" }}>
                 {row.plan}
@@ -117,14 +80,14 @@ export default function SubscriptionTable() {
                 {row.duration}
               </TableCell>
               <TableCell sx={{ width: "14%", textAlign: "center" }}>
-                {row.start}
+                {row.start_date}
               </TableCell>
               <TableCell sx={{ width: "14%", textAlign: "center" }}>
-                {row.end}
+                {row.end_date}
               </TableCell>
               <TableCell sx={{ width: "14%", textAlign: "center" }}>
                 <div>
-                  {row.status === "active" ? (
+                  {new Date(row.end_date) >= new Date() ? (
                     <p className="bg-[#A5FF9647] rounded-s-full rounded-e-full py-1 flex gap-2 items-center justify-center text-[#1E9609]">
                       <span className="text-xl">
                         <GoDotFill />

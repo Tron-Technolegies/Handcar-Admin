@@ -2,36 +2,35 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { base_url } from "../../constants";
 
 const useAddSubscriber = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const addSubscriber = async ({
-    name,
+    email,
     zip,
     vendor,
     service,
     plan,
     duration,
     start,
-    end,
   }) => {
     setLoading(true);
     try {
-      const res = await axios.post("url", {
-        name,
-        zip,
-        vendor,
-        service,
+      const res = await axios.post(`${base_url}/add_subscriber`, {
+        email,
+        postal_code: zip,
+        assigned_vendor: vendor,
+        service_type: service,
         plan,
         duration,
-        start,
-        end,
+        start_date: start,
       });
       const data = res.data;
       toast.success("Subscriber added successfully");
-      navigate("/subsriptions");
+      navigate("/subscriptions");
     } catch (err) {
       toast.error(
         err?.response?.data?.msg || err?.error || "something went wrong"

@@ -20,3 +20,5 @@ log section view
 authentication
 
 search functionality of users
+
+search functionality of subscribers
