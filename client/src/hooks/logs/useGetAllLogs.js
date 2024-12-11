@@ -24,7 +24,11 @@ const useGetAllLogs = () => {
     getAllLogs();
   }, []);
 
-  return { loading, logs };
+  const refetch = () => {
+    getAllLogs();
+  };
+
+  return { loading, logs, refetch };
 };
 
 export default useGetAllLogs;
