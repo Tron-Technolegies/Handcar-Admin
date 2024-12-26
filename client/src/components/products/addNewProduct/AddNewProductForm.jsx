@@ -1,24 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormInput from "../../FormInput";
 import FormSelect from "../../FormSelect";
 import { FiUpload } from "react-icons/fi";
 import useGetAllCategories from "../../../hooks/category/useGetAllCategories";
 import useGetAllBrands from "../../../hooks/brands/useGetAllBrands";
 import useAddProduct from "../../../hooks/products/useAddProduct";
-import useAddProductImage from "../../../hooks/products/useAddProductImage";
+import Loading from "../../Loading";
 
 export default function AddNewProductForm() {
-  const { categories } = useGetAllCategories({ search: "" });
-  const { brands } = useGetAllBrands({ search: "" });
+  const { categories, loading: categoryLoading } = useGetAllCategories({
+    search: "",
+  });
+  const { brands, loading: brandLoading } = useGetAllBrands({ search: "" });
   const { loading, addProduct } = useAddProduct();
-  const { addImage, data } = useAddProductImage();
+
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState();
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
   const [description, setDescription] = useState("");
+
+  useEffect(() => {
+    if (categories?.length > 0) {
+      setCategory(categories[0].name);
+    }
+  }, [categoryLoading]);
+  useEffect(() => {
+    if (brands?.length > 0) {
+      setBrand(brands[0].name);
+    }
+  }, [brandLoading]);
   return (
     <div className="my-10">
       <FormInput
@@ -47,8 +60,7 @@ export default function AddNewProductForm() {
           <input
             type="file"
             hidden
-            value={image}
-            onChange={(e) => addImage(e)}
+            onChange={(e) => setImage(e.target.files[0])}
           />
         </label>
       </div>
@@ -82,11 +94,11 @@ export default function AddNewProductForm() {
         onClick={() =>
           addProduct({
             name,
-            category_id: category,
-            brand_id: brand,
+            category_name: category,
+            brand_name: brand,
             description,
             price,
-            image: data,
+            image: image,
             discount_percentage: stock,
           })
         }
@@ -94,6 +106,7 @@ export default function AddNewProductForm() {
         <button className="px-4 py-2 rounded-lg bg-black text-white">
           Save Product
         </button>
+        {loading && <Loading />}
       </div>
     </div>
   );

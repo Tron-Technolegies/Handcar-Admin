@@ -1,8 +1,13 @@
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useState } from "react";
 import FormInput from "../../components/FormInput";
+import useLogin from "../../hooks/auth/useLogin";
+import Loading from "../../components/Loading";
 
 export default function LoginPage() {
+  const { loading, login } = useLogin();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -20,13 +25,27 @@ export default function LoginPage() {
         <img src="/logo.png" className="w-[150px]"></img>
         <h4 className="text-xl font-semibold">ADMIN LOGIN</h4>
         <div className="w-full px-10 flex flex-col gap-3">
-          <FormInput type={"email"} placeholder={"example@gmail.com"} />
-          <FormInput placeholder={"Password"} type={"password"} />
+          <FormInput
+            type={"text"}
+            placeholder={"Username"}
+            value={username}
+            onchange={(e) => setUsername(e.target.value)}
+          />
+          <FormInput
+            placeholder={"Password"}
+            type={"password"}
+            value={password}
+            onchange={(e) => setPassword(e.target.value)}
+          />
         </div>
         <div className="w-full px-10 flex flex-col gap-3 items-center">
-          <button className="px-5 py-3 bg-[#DB1215] rounded-lg w-full text-white font-semibold">
+          <button
+            onClick={() => login({ username, password })}
+            className="px-5 py-3 bg-[#DB1215] rounded-lg w-full text-white font-semibold"
+          >
             Login
           </button>
+          {loading && <Loading />}
         </div>
       </motion.div>
     </motion.div>

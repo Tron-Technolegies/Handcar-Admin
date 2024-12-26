@@ -10,31 +10,27 @@ const useAddProduct = () => {
 
   const addProduct = async ({
     name,
-    category_id,
-    brand_id,
+    category_name,
+    brand_name,
     image,
     price,
     discount_percentage,
     description,
   }) => {
     setLoading(true);
+    const formdata = new FormData();
+    formdata.append("name", name);
+    formdata.append("category_name", category_name);
+    formdata.append("brand_name", brand_name);
+    formdata.append("price", price);
+    formdata.append("image", image);
+    formdata.append("discount_percentage", discount_percentage);
+    formdata.append("description", description);
     try {
-      const res = await axios.post(
-        `${base_url}/add_product`,
-        {
-          name,
-          category_id,
-          brand_id,
-          image,
-          price,
-          discount_percentage,
-          description,
-        },
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-          withCredentials: true,
-        }
-      );
+      const res = await axios.post(`${base_url}/add_product`, formdata, {
+        headers: { "Content-Type": "multipart/form-data" },
+        withCredentials: true,
+      });
       const data = res.data;
       toast.success("Product added successfully");
       navigate("/products");

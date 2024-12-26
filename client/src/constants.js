@@ -1,1 +1,1 @@
-export const base_url = "http://192.168.1.48:8000";
+export const base_url = "https://handcar-backend-1.onrender.com";
