@@ -1,17 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormInput from "../../FormInput";
 import { FiUpload } from "react-icons/fi";
 import FormSelect from "../../FormSelect";
+import useGetSingleProduct from "../../../hooks/products/useGetSingleProduct";
+import { useParams } from "react-router-dom";
+import Loading from "../../Loading";
 
 export default function EditProductForm() {
+  const { id } = useParams();
+  const { loading, product } = useGetSingleProduct({ id });
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState();
+  const [images, setImages] = useState("");
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
   const [description, setDescription] = useState("");
-  return (
+
+  useEffect(() => {
+    if (product) {
+      setName(product.name);
+      setCategory(product.category_name);
+      setBrand(product.brand_name);
+      setImages(product.image);
+      setPrice(product.price);
+      setStock(product.stock ? product.stock : "");
+      setDescription(product.description);
+    }
+  }, [loading]);
+  return loading ? (
+    <Loading />
+  ) : (
     <div className="my-10">
       <FormInput
         title={"Name"}
@@ -32,12 +52,22 @@ export default function EditProductForm() {
         value={brand}
         onchange={(e) => setBrand(e.target.value)}
       />
-      <div className="flex flex-col mb-3">
-        <label className="text-sm mb-3">Product Image</label>
-        <label className="w-16 h-16 border rounded-lg border-[#959595] text-[#959595] text-3xl flex justify-center items-center cursor-pointer">
-          <FiUpload />
-          <input type="file" hidden />
-        </label>
+      <div className="flex items-center gap-3 mb-3">
+        <div className="flex flex-col ">
+          <label className="text-sm mb-3">Product Image</label>
+          <label className="w-16 h-16 border rounded-lg border-[#959595] text-[#959595] text-3xl flex justify-center items-center cursor-pointer">
+            <FiUpload />
+            <input
+              type="file"
+              hidden
+              onChange={(e) => {
+                setImage(e.target.files[0]);
+                setImages(e.target.files[0].name);
+              }}
+            />
+          </label>
+        </div>
+        <p>{images}</p>
       </div>
 
       <FormInput

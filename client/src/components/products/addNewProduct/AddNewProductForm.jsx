@@ -18,6 +18,7 @@ export default function AddNewProductForm() {
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
   const [image, setImage] = useState();
+  const [images, setImages] = useState("");
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
   const [description, setDescription] = useState("");
@@ -53,16 +54,23 @@ export default function AddNewProductForm() {
         value={brand}
         onchange={(e) => setBrand(e.target.value)}
       />
-      <div className="flex flex-col mb-3">
-        <label className="text-sm mb-3">Product Image</label>
-        <label className="w-16 h-16 border rounded-lg border-[#959595] text-[#959595] text-3xl flex justify-center items-center cursor-pointer">
-          <FiUpload />
-          <input
-            type="file"
-            hidden
-            onChange={(e) => setImage(e.target.files[0])}
-          />
-        </label>
+      <div className="flex items-center gap-5 mb-3">
+        <div className="flex flex-col">
+          <label className="text-sm mb-3">Product Image</label>
+          <label className="w-16 h-16 border rounded-lg border-[#959595] text-[#959595] text-3xl flex justify-center items-center cursor-pointer">
+            <FiUpload />
+            <input
+              type="file"
+              hidden
+              onChange={(e) => {
+                setImage(e.target.files[0]);
+                setImages(e.target.files[0].name);
+              }}
+            />
+          </label>
+        </div>
+
+        <p className="w-fit inline">{images}</p>
       </div>
 
       <FormInput
