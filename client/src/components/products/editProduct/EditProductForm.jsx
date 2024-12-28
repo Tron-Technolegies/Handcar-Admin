@@ -5,10 +5,12 @@ import FormSelect from "../../FormSelect";
 import useGetSingleProduct from "../../../hooks/products/useGetSingleProduct";
 import { useParams } from "react-router-dom";
 import Loading from "../../Loading";
+import useEditProduct from "../../../hooks/products/useEditProduct";
 
 export default function EditProductForm() {
   const { id } = useParams();
   const { loading, product } = useGetSingleProduct({ id });
+  const { loading: editLoading, editProduct } = useEditProduct();
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
@@ -95,9 +97,24 @@ export default function EditProductForm() {
         ></textarea>
       </div>
       <div className="flex justify-end">
-        <button className="px-4 py-2 rounded-lg bg-black text-white">
+        <button
+          onClick={() =>
+            editProduct({
+              id,
+              name,
+              category_name: category,
+              brand_name: brand,
+              image: image && image,
+              price,
+              description,
+              stock,
+            })
+          }
+          className="px-4 py-2 rounded-lg bg-black text-white"
+        >
           Update Product
         </button>
+        {loading && <Loading />}
       </div>
     </div>
   );

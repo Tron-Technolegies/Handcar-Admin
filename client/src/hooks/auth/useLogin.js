@@ -10,10 +10,13 @@ const useLogin = () => {
 
   const login = async ({ username, password }) => {
     setLoading(true);
+    const formdata = new FormData();
+    formdata.append("username", username);
+    formdata.append("password", password);
     try {
-      const res = await axios.post(`${base_url}/admin_login`, {
-        username,
-        password,
+      const res = await axios.post(`${base_url}/admin_login`, formdata, {
+        headers: { "Content-Type": "multipart/formdata" },
+        withCredentials: true,
       });
       const data = res.data;
       toast.success("successfully logged in");

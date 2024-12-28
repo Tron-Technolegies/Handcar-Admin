@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { base_url } from "../../constants";
 
 const useEditProduct = () => {
   const [loading, setLoading] = useState(false);
@@ -10,24 +11,34 @@ const useEditProduct = () => {
   const editProduct = async ({
     id,
     name,
-    category,
-    brand,
+    category_name,
+    brand_name,
     image,
     price,
     stock,
     description,
   }) => {
+    const product_id = id;
     setLoading(true);
+    const formdata = new FormData();
+    formdata.append("name", name);
+    formdata.append("category_name", category_name);
+    formdata.append("brand_name", brand_name);
+    formdata.append("price", price);
+    formdata.append("image", image);
+    formdata.append("discount_percentage", stock);
+    formdata.append("description", description);
     try {
-      const res = await axios.patch("url", {
-        name,
-        category,
-        brand,
-        image,
-        price,
-        stock,
-        description,
-      });
+      const res = await axios.post(
+        `${base_url}/edit_product/${product_id}/`,
+        formdata,
+        {
+          headers: {
+            "Content-Type": "multipart/formdata",
+          },
+          withCredentials: true,
+        }
+      );
       const data = res.data;
       toast.success("Product successfully updated");
       navigate("/products");
