@@ -7,95 +7,55 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { GoDotFill } from "react-icons/go";
-
-function createData(name, date, time, communication, vendor, service, status) {
-  return { name, date, time, communication, vendor, service, status };
-}
-
-const rows = [
-  createData(
-    "Tom Cruise",
-    "12/11/2024",
-    "10:10 am",
-    "WhatsApp",
-    "Purushothaman",
-    "Car wash",
-    "Accepted"
-  ),
-  createData(
-    "Tom Cruise",
-    "12/11/2024",
-    "10:10 am",
-    "WhatsApp",
-    "Purushothaman",
-    "Maintenance",
-    "Declined"
-  ),
-  createData(
-    "Tom Cruise",
-    "12/11/2024",
-    "10:10 am",
-    "WhatsApp",
-    "Purushothaman",
-    "Car wash",
-    "Pending"
-  ),
-  createData(
-    "Tom Cruise",
-    "12/11/2024",
-    "10:10 am",
-    "WhatsApp",
-    "Purushothaman",
-    "Car wash",
-    "Accepted"
-  ),
-];
+import useGetAllLogs from "../../hooks/logs/useGetAllLogs";
 
 export default function LogTable() {
+  const { loading, logs } = useGetAllLogs();
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow sx={{ backgroundColor: "#F9FAFB" }}>
             <TableCell
-              sx={{ width: "16%", textAlign: "center", fontWeight: "bold" }}
+              sx={{ width: "20%", textAlign: "center", fontWeight: "bold" }}
             >
               Username
             </TableCell>
             <TableCell
-              sx={{ width: "14%", textAlign: "center", fontWeight: "bold" }}
+              sx={{ width: "20%", textAlign: "center", fontWeight: "bold" }}
             >
               Date
             </TableCell>
             <TableCell
-              sx={{ width: "14%", textAlign: "center", fontWeight: "bold" }}
+              sx={{ width: "20%", textAlign: "center", fontWeight: "bold" }}
             >
               Time
             </TableCell>
             <TableCell
-              sx={{ width: "14%", textAlign: "center", fontWeight: "bold" }}
+              sx={{ width: "20%", textAlign: "center", fontWeight: "bold" }}
             >
               Communication
             </TableCell>
             <TableCell
-              sx={{ width: "14%", textAlign: "center", fontWeight: "bold" }}
+              sx={{ width: "20%", textAlign: "center", fontWeight: "bold" }}
             >
               Vendor
             </TableCell>
-            <TableCell
+            {/* <TableCell
               sx={{ width: "14%", textAlign: "center", fontWeight: "bold" }}
             >
               Service Category
-            </TableCell>
-            <TableCell
+            </TableCell> */}
+            {/* <TableCell
               sx={{ width: "14%", textAlign: "center", fontWeight: "bold" }}
             >
               Status
-            </TableCell>
+            </TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, index) => (
+          {logs.map((row, index) => (
             <TableRow
               key={index}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -103,23 +63,23 @@ export default function LogTable() {
               <TableCell
                 component="th"
                 scope="row"
-                sx={{ width: "16%", textAlign: "center" }}
+                sx={{ width: "20%", textAlign: "center" }}
               >
-                {row.name}
+                {"UserName"}
               </TableCell>
-              <TableCell sx={{ width: "14%", textAlign: "center" }}>
-                {row.date}
+              <TableCell sx={{ width: "20%", textAlign: "center" }}>
+                {row.timestamp.slice(0, 10)}
               </TableCell>
-              <TableCell sx={{ width: "14%", textAlign: "center" }}>
-                {row.time}
+              <TableCell sx={{ width: "20%", textAlign: "center" }}>
+                {row.timestamp.slice(11)}
               </TableCell>
-              <TableCell sx={{ width: "14%", textAlign: "center" }}>
-                {row.communication}
+              <TableCell sx={{ width: "20%", textAlign: "center" }}>
+                {row.action}
               </TableCell>
-              <TableCell sx={{ width: "14%", textAlign: "center" }}>
-                {row.vendor}
+              <TableCell sx={{ width: "20%", textAlign: "center" }}>
+                {row.service_name}
               </TableCell>
-              <TableCell sx={{ width: "14%", textAlign: "center" }}>
+              {/* <TableCell sx={{ width: "14%", textAlign: "center" }}>
                 {row.service}
               </TableCell>
               <TableCell sx={{ width: "14%", textAlign: "center" }}>
@@ -147,7 +107,7 @@ export default function LogTable() {
                     </p>
                   )}
                 </div>
-              </TableCell>
+              </TableCell> */}
             </TableRow>
           ))}
         </TableBody>

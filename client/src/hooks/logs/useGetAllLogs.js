@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { base_url } from "../../constants";
 
 const useGetAllLogs = () => {
   const [loading, setLoading] = useState(false);
@@ -9,7 +10,9 @@ const useGetAllLogs = () => {
   const getAllLogs = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("url");
+      const res = await axios.get(
+        `${base_url}/get_service_interaction_logs_admin`
+      );
       const data = res.data;
       setLogs(data.logs);
     } catch (err) {
