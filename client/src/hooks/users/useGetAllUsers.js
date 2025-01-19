@@ -10,7 +10,7 @@ const useGetAllUsers = ({ search }) => {
   const getAllUsers = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${base_url}/view_users`, {
+      const res = await axios.get(`${base_url}/view_users_by_admin`, {
         params: {
           search,
         },
