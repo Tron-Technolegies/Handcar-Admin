@@ -9,7 +9,7 @@ const useDeleteVendor = () => {
   const deleteVendor = async ({ id }) => {
     setLoading(true);
     try {
-      const res = await axios.delete(`${base_url}/delete_vendor/${id}/`);
+      const res = await axios.delete(`${base_url}/delete_service/${id}/`);
       const data = res.data;
       toast.success("Vendor successfully deleted");
     } catch (err) {

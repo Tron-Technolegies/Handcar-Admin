@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import FormInput from "../../FormInput";
 import useEditVendor from "../../../hooks/vendors/useEditVendor";
 import Loading from "../../Loading";
 import { useParams } from "react-router-dom";
+import useGetSingleVendor from "../../../hooks/vendors/useGetSingleVendor";
 
 export default function EditVendorForm() {
   const [name, setName] = useState("");
@@ -12,8 +13,19 @@ export default function EditVendorForm() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const { id } = useParams();
+  const { loading: vendorLoading, vendor } = useGetSingleVendor({ id });
   const { loading, editVendor } = useEditVendor();
-  return (
+
+  useEffect(() => {
+    if (vendor) {
+      setName(vendor.vendor_name);
+      setEmail(vendor.email);
+      setPhone(vendor.phone_number);
+    }
+  }, [vendor]);
+  return vendorLoading ? (
+    <Loading />
+  ) : (
     <div>
       <FormInput
         title={"Vendor Name"}

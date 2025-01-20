@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { base_url } from "../../constants";
 
 const useGetSingleVendor = ({ id }) => {
   const [loading, setLoading] = useState(false);
@@ -9,9 +10,9 @@ const useGetSingleVendor = ({ id }) => {
   const getSingleVendor = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("url");
+      const res = await axios.get(`${base_url}/edit_vendor_profile/${id}/`);
       const data = res.data;
-      setVendor(data.vendor);
+      setVendor(data.vendor_data);
     } catch (err) {
       toast.error(
         err?.response?.data?.msg || err?.error || "something went wrong"

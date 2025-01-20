@@ -71,9 +71,9 @@ export default function VendorTable({ search }) {
               </TableCell>
               <TableCell sx={{ width: "25%", textAlign: "center" }}>
                 <div className="flex gap-5 justify-center text-xl text-[#ABABAB]">
-                  <Link to={`/services/${row.id}/edit`}>
+                  {/* <Link to={`/services/${row.id}/edit`}>
                     <FaRegEdit />
-                  </Link>
+                  </Link> */}
                   <button
                     onClick={() => {
                       setShowDeletePopup(true);

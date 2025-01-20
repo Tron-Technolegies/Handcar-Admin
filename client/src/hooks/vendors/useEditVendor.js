@@ -11,7 +11,7 @@ const useEditVendor = () => {
   const editVendor = async ({ name, email, phone, password, id }) => {
     setLoading(true);
     try {
-      const res = await axios.put(`${base_url}/edit_vendor/${id}/`, {
+      const res = await axios.put(`${base_url}/edit_vendor_profile/${id}/`, {
         vendor_name: name,
         email,
         phone_number: phone,

@@ -8,11 +8,14 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { GoDotFill } from "react-icons/go";
 import useGetAllLogs from "../../hooks/logs/useGetAllLogs";
+import Loading from "../Loading";
 
 export default function LogTable() {
   const { loading, logs } = useGetAllLogs();
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
