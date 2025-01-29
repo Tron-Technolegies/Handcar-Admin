@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { navItems } from "../../utils/NavItems";
 import NavItem from "./NavItem";
 import { NavLink, useLocation } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
 import { IoIosLogOut } from "react-icons/io";
+import useLogout from "../../hooks/auth/useLogout";
+import { AdminContext } from "../../AdminContext";
 
 export default function SideBar() {
   const location = useLocation();
+  const { setUser } = useContext(AdminContext);
+  const { logout, loading } = useLogout();
 
   return (
     <div className="w-[300px] p-5 flex flex-col gap-7 border shadow-lg min-h-screen sticky top-0 left-0">
@@ -34,7 +38,13 @@ export default function SideBar() {
             location={location?.pathname}
           />
         ))}
-        <button className="flex items-center gap-3 px-3 py-2 rounded-lg text-[#6a6969] hover:text-black hover:bg-[#FAEBEB] ease-in-out duration-500">
+        <button
+          onClick={async () => {
+            await logout();
+            setUser(null);
+          }}
+          className="flex items-center gap-3 px-3 py-2 rounded-lg text-[#6a6969] hover:text-black hover:bg-[#FAEBEB] ease-in-out duration-500"
+        >
           <IoIosLogOut />
           Logout
         </button>

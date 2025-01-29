@@ -3,11 +3,13 @@ import React, { useState } from "react";
 import FormInput from "../../components/FormInput";
 import useLogin from "../../hooks/auth/useLogin";
 import Loading from "../../components/Loading";
+import useGetUserInfo from "../../hooks/auth/useGetUserInfo";
 
 export default function LoginPage() {
   const { loading, login } = useLogin();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { refetch } = useGetUserInfo();
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -40,7 +42,10 @@ export default function LoginPage() {
         </div>
         <div className="w-full px-10 flex flex-col gap-3 items-center">
           <button
-            onClick={() => login({ username, password })}
+            onClick={async () => {
+              await login({ username, password });
+              refetch();
+            }}
             className="px-5 py-3 bg-[#DB1215] rounded-lg w-full text-white font-semibold"
           >
             Login
