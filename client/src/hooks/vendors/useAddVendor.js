@@ -11,12 +11,16 @@ const useAddVendor = () => {
   const addVendor = async ({ name, email, phone, password }) => {
     setLoading(true);
     try {
-      const res = await axios.post(`${base_url}/add_vendor_by_admin`, {
-        vendor_name: name,
-        email,
-        phone_number: phone,
-        password,
-      });
+      const res = await axios.post(
+        `${base_url}/add_vendor_by_admin`,
+        {
+          vendor_name: name,
+          email,
+          phone_number: phone,
+          password,
+        },
+        { withCredentials: true }
+      );
       const data = res.data;
       toast.success("Vendor successfully added");
       navigate("/services");

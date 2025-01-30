@@ -10,6 +10,12 @@ import { TbLogs } from "react-icons/tb";
 import { GrPlan } from "react-icons/gr";
 export const navItems = [
   { id: 2, icon: <FaUsers />, name: "Users", path: "/users" },
+  {
+    id: 12,
+    icon: <MdCategory />,
+    name: "Service Category",
+    path: "/service_category",
+  },
   // { id: 3, icon: <AiFillProduct />, name: "Products", path: "/products" },
   // { id: 4, icon: <MdCategory />, name: "Category", path: "/category" },
   // { id: 5, icon: <MdBrandingWatermark />, name: "Brand", path: "/brand" },

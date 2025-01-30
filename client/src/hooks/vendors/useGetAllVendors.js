@@ -10,10 +10,11 @@ const useGetAllVendors = ({ search }) => {
   const getAllVendors = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${base_url}/view_services`, {
+      const res = await axios.get(`${base_url}/view_services_by_admin`, {
         params: {
           search,
         },
+        withCredentials: true,
       });
       const data = res.data;
       setVendors(data.vendor);

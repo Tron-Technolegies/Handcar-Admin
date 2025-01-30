@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,10 +9,18 @@ import Paper from "@mui/material/Paper";
 import { GoDotFill } from "react-icons/go";
 import useGetAllLogs from "../../hooks/logs/useGetAllLogs";
 import Loading from "../Loading";
+import { AdminContext } from "../../AdminContext";
 
-export default function LogTable() {
-  const { loading, logs } = useGetAllLogs();
+export default function LogTable({ search, type }) {
+  const { refetchTrigger, setRefetchTrigger } = useContext(AdminContext);
+  const { loading, logs, refetch } = useGetAllLogs({
+    queryType: type,
+    query: search,
+  });
 
+  useEffect(() => {
+    refetch();
+  }, [refetchTrigger]);
   return loading ? (
     <Loading />
   ) : (

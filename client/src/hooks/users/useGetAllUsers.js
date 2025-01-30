@@ -14,6 +14,7 @@ const useGetAllUsers = ({ search }) => {
         params: {
           search,
         },
+        withCredentials: true,
       });
       const data = res.data;
       setUsers(data.user);

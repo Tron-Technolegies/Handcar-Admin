@@ -28,6 +28,9 @@ import PlansPage from "./pages/plans/PlansPage";
 import AddPlanPage from "./pages/plans/AddPlanPage";
 import EditPlanPage from "./pages/plans/EditPlanPage";
 import LoginPage from "./pages/login/LoginPage";
+import ServiceCategoryPage from "./pages/servicecategory/ServiceCategoryPage";
+import AddServiceCategory from "./pages/servicecategory/AddServiceCategory";
+import EditServiceCategory from "./pages/servicecategory/EditServiceCategory";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -84,6 +87,18 @@ export default function App() {
         {
           path: "brand/:id/edit",
           element: <EditBrandPage />,
+        },
+        {
+          path: "service_category",
+          element: <ServiceCategoryPage />,
+        },
+        {
+          path: "service_category/new",
+          element: <AddServiceCategory />,
+        },
+        {
+          path: "service_category/:id/edit",
+          element: <EditServiceCategory />,
         },
         {
           path: "services",

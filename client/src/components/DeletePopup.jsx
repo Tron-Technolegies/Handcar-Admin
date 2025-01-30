@@ -9,6 +9,7 @@ import useDeleteCoupon from "../hooks/offers/useDeleteCoupon";
 import useRemovePlan from "../hooks/plans/useRemovePlan";
 import useRemovePromotedProduct from "../hooks/promotions/useRemovePromotedProduct";
 import useRemovePromotedBrand from "../hooks/promotions/useRemovePromotedBrand";
+import useDeleteServiceCategory from "../hooks/servicecategory/useDeleteServiceCategory";
 
 export default function DeletePopup({ setPopup }) {
   const {
@@ -24,6 +25,8 @@ export default function DeletePopup({ setPopup }) {
   const { loading: vendorLoading, deleteVendor } = useDeleteVendor();
   const { loading: couponLoading, deleteCoupon } = useDeleteCoupon();
   const { loading: planLoading, removePlan } = useRemovePlan();
+  const { loading: serCatLoading, deleteServiceCategory } =
+    useDeleteServiceCategory();
   const { loading: promotedProductLoading, removePromotedProduct } =
     useRemovePromotedProduct();
   const { loading: promotedBrandLoading, removePromotedBrand } =
@@ -39,6 +42,13 @@ export default function DeletePopup({ setPopup }) {
     }
     if (deleteType === "brand") {
       await deleteBrand({ id: deleteId });
+      setDeleteId("");
+      setPopup(false);
+      setRefetchTrigger(!refetchTrigger);
+      setDeleteType("");
+    }
+    if (deleteType === "service_category") {
+      await deleteServiceCategory({ id: deleteId });
       setDeleteId("");
       setPopup(false);
       setRefetchTrigger(!refetchTrigger);
@@ -124,6 +134,7 @@ export default function DeletePopup({ setPopup }) {
         {planLoading && <Loading />}
         {promotedProductLoading && <Loading />}
         {promotedBrandLoading && <Loading />}
+        {serCatLoading && <Loading />}
       </motion.div>
     </motion.div>
   );

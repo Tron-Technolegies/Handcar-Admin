@@ -7,9 +7,11 @@ import { RiCloseFill } from "react-icons/ri";
 import { AdminContext } from "../../AdminContext";
 import { motion } from "framer-motion";
 import { IoIosLogOut } from "react-icons/io";
+import useLogout from "../../hooks/auth/useLogout";
 
 export default function SmallScreenBar() {
-  const { setShowSmallBar } = useContext(AdminContext);
+  const { setShowSmallBar, setUser } = useContext(AdminContext);
+  const { logout, loading } = useLogout();
 
   return (
     <motion.div
@@ -57,7 +59,13 @@ export default function SmallScreenBar() {
                 location={location?.pathname}
               />
             ))}
-            <button className="flex items-center gap-3 px-3 py-2 rounded-lg text-[#6a6969] hover:text-black hover:bg-[#FAEBEB] ease-in-out duration-500">
+            <button
+              onClick={async () => {
+                await logout();
+                setUser(null);
+              }}
+              className="flex items-center gap-3 px-3 py-2 rounded-lg text-[#6a6969] hover:text-black hover:bg-[#FAEBEB] ease-in-out duration-500"
+            >
               <IoIosLogOut />
               Logout
             </button>
