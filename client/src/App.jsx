@@ -48,46 +48,46 @@ export default function App() {
           path: "users",
           element: <UserPage />,
         },
-        // {
-        //   path: "products",
-        //   element: <ProductsPage />,
-        // },
-        // {
-        //   path: "products/new",
-        //   element: <AddNewProduct />,
-        // },
-        // {
-        //   path: "products/:id",
-        //   element: <ProductSinglePage />,
-        // },
-        // {
-        //   path: "products/:id/edit",
-        //   element: <EditProductPage />,
-        // },
-        // {
-        //   path: "category",
-        //   element: <CategoryPage />,
-        // },
-        // {
-        //   path: "category/new",
-        //   element: <AddCategoryPage />,
-        // },
-        // {
-        //   path: "category/:id/edit",
-        //   element: <EditCategoryPage />,
-        // },
-        // {
-        //   path: "brand",
-        //   element: <BrandPage />,
-        // },
-        // {
-        //   path: "brand/new",
-        //   element: <AddBrandPage />,
-        // },
-        // {
-        //   path: "brand/:id/edit",
-        //   element: <EditBrandPage />,
-        // },
+        {
+          path: "products",
+          element: <ProductsPage />,
+        },
+        {
+          path: "products/new",
+          element: <AddNewProduct />,
+        },
+        {
+          path: "products/:id",
+          element: <ProductSinglePage />,
+        },
+        {
+          path: "products/:id/edit",
+          element: <EditProductPage />,
+        },
+        {
+          path: "category",
+          element: <CategoryPage />,
+        },
+        {
+          path: "category/new",
+          element: <AddCategoryPage />,
+        },
+        {
+          path: "category/:id/edit",
+          element: <EditCategoryPage />,
+        },
+        {
+          path: "brand",
+          element: <BrandPage />,
+        },
+        {
+          path: "brand/new",
+          element: <AddBrandPage />,
+        },
+        {
+          path: "brand/:id/edit",
+          element: <EditBrandPage />,
+        },
         {
           path: "service_category",
           element: <ServiceCategoryPage />,
@@ -112,46 +112,46 @@ export default function App() {
           path: "services/:id/edit",
           element: <EditVendor />,
         },
-        // {
-        //   path: "subscriptions",
-        //   element: <SubscriptionPage />,
-        // },
-        // {
-        //   path: "subscriptions/new",
-        //   element: <AddSubscribersPage />,
-        // },
+        {
+          path: "subscriptions",
+          element: <SubscriptionPage />,
+        },
+        {
+          path: "subscriptions/new",
+          element: <AddSubscribersPage />,
+        },
         {
           path: "logs",
           element: <LogPage />,
         },
-        // {
-        //   path: "offers",
-        //   element: <OfferPage />,
-        // },
-        // {
-        //   path: "offers/new",
-        //   element: <AddCoupon />,
-        // },
-        // {
-        //   path: "offers/:id/edit",
-        //   element: <EditCoupon />,
-        // },
-        // {
-        //   path: "promotions",
-        //   element: <PromotionPage />,
-        // },
-        // {
-        //   path: "plans",
-        //   element: <PlansPage />,
-        // },
-        // {
-        //   path: "plans/new",
-        //   element: <AddPlanPage />,
-        // },
-        // {
-        //   path: "plans/:id/edit",
-        //   element: <EditPlanPage />,
-        // },
+        {
+          path: "offers",
+          element: <OfferPage />,
+        },
+        {
+          path: "offers/new",
+          element: <AddCoupon />,
+        },
+        {
+          path: "offers/:id/edit",
+          element: <EditCoupon />,
+        },
+        {
+          path: "promotions",
+          element: <PromotionPage />,
+        },
+        {
+          path: "plans",
+          element: <PlansPage />,
+        },
+        {
+          path: "plans/new",
+          element: <AddPlanPage />,
+        },
+        {
+          path: "plans/:id/edit",
+          element: <EditPlanPage />,
+        },
       ],
     },
   ]);
