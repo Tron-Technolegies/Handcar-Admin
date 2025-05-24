@@ -18,7 +18,7 @@ const useGetUserInfo = () => {
       setUser(data);
     } catch (error) {
       console.log(error);
-      // navigate("/login");
+      navigate("/login");
     } finally {
       setLoading(false);
     }

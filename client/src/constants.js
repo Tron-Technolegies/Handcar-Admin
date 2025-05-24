@@ -1,2 +1,2 @@
-export const base_url = "http://3.109.148.149";
+export const base_url = "http://51.20.223.9";
 //https://handcar-backend-1.onrender.com
