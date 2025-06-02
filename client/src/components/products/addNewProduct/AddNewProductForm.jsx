@@ -19,8 +19,9 @@ export default function AddNewProductForm() {
   const [brand, setBrand] = useState("");
   const [image, setImage] = useState();
   const [images, setImages] = useState("");
-  const [price, setPrice] = useState("");
-  const [stock, setStock] = useState("");
+  const [price, setPrice] = useState(0);
+  const [stock, setStock] = useState(0);
+  const [discount, setDiscount] = useState(0);
   const [description, setDescription] = useState("");
 
   useEffect(() => {
@@ -81,6 +82,13 @@ export default function AddNewProductForm() {
         onchange={(e) => setPrice(e.target.value)}
       />
       <FormInput
+        title={"Discount"}
+        type={"number"}
+        placeholder={"10"}
+        value={discount}
+        onchange={(e) => setDiscount(e.target.value)}
+      />
+      <FormInput
         title={"Stock"}
         type={"number"}
         placeholder={"10"}
@@ -107,7 +115,8 @@ export default function AddNewProductForm() {
             description,
             price,
             image: image,
-            discount_percentage: stock,
+            discount_percentage: discount,
+            stock: stock,
           })
         }
       >

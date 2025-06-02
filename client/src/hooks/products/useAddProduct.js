@@ -16,6 +16,7 @@ const useAddProduct = () => {
     price,
     discount_percentage,
     description,
+    stock,
   }) => {
     setLoading(true);
     const formdata = new FormData();
@@ -26,6 +27,7 @@ const useAddProduct = () => {
     formdata.append("image", image);
     formdata.append("discount_percentage", discount_percentage);
     formdata.append("description", description);
+    formdata.append("stock", stock);
     try {
       const res = await axios.post(`${base_url}/add_product`, formdata, {
         headers: { "Content-Type": "multipart/form-data" },
