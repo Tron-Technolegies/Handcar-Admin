@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdOutlineEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { AdminContext } from "../../AdminContext";
@@ -132,6 +132,9 @@ export default function ProductTable({ search }) {
               </TableCell>
               <TableCell sx={{ width: "20%", textAlign: "center" }}>
                 <div className="flex gap-5 justify-center text-xl text-[#ABABAB]">
+                  <Link to={`products/${row._id}/edit`}>
+                    <MdOutlineEdit />
+                  </Link>
                   <button onClick={() => setShowDeletePopup(true)}>
                     <RiDeleteBin6Line />
                   </button>
