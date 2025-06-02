@@ -132,7 +132,7 @@ export default function ProductTable({ search }) {
               </TableCell>
               <TableCell sx={{ width: "20%", textAlign: "center" }}>
                 <div className="flex gap-5 justify-center text-xl text-[#ABABAB]">
-                  <Link to={`products/${row._id}/edit`}>
+                  <Link to={`products/${row.id}/edit`}>
                     <MdOutlineEdit />
                   </Link>
                   <button onClick={() => setShowDeletePopup(true)}>
