@@ -13,55 +13,6 @@ import { AdminContext } from "../../AdminContext";
 import useGetAllProducts from "../../hooks/products/useGetAllProducts";
 import Loading from "../Loading";
 
-function createData(product, stock, price) {
-  return { product, stock, price };
-}
-
-const rows = [
-  createData(
-    <Link to={"/products/1"} className="flex gap-2 items-center w-fit">
-      <img
-        src="/dashboard/product.png"
-        className="w-[50px] h-[50px] rounded-md"
-      ></img>
-      <div className="flex items-start flex-col gap-1">
-        <p className="font-medium">Dash Cam</p>
-        <p className="text-sm text-[#7D7D7D]">A800S</p>
-      </div>
-    </Link>,
-    35,
-    "$35"
-  ),
-  createData(
-    <Link to={"/products/2"} className="flex gap-2 items-center w-fit">
-      <img
-        src="/dashboard/product.png"
-        className="w-[50px] h-[50px] rounded-md"
-      ></img>
-      <div className="flex items-start flex-col gap-1">
-        <p className="font-medium">Dash Cam</p>
-        <p className="text-sm text-[#7D7D7D]">A800S</p>
-      </div>
-    </Link>,
-    40,
-    "$35"
-  ),
-  createData(
-    <Link to={"/products/3"} className="flex gap-2 items-center max-w-fit">
-      <img
-        src="/dashboard/product.png"
-        className="w-[50px] h-[50px] rounded-md"
-      ></img>
-      <div className="flex items-start flex-col gap-1">
-        <p className="font-medium">Dash Cam</p>
-        <p className="text-sm text-[#7D7D7D]">A800S</p>
-      </div>
-    </Link>,
-    50,
-    "$35"
-  ),
-];
-
 export default function ProductTable({ search }) {
   const { setShowDeletePopup, refetchTrigger } = useContext(AdminContext);
   const { loading, products, refetch } = useGetAllProducts({ search });

@@ -12,7 +12,7 @@ import Loading from "../Loading";
 const rows = [];
 
 export default function LatestProducts() {
-  const { loading, products } = useGetAllProducts();
+  const { loading, products } = useGetAllProducts({ search: "" });
   return loading ? (
     <Loading />
   ) : (
