@@ -39,11 +39,6 @@ export default function UserPageTable({ search }) {
             >
               Email
             </TableCell>
-            <TableCell
-              sx={{ width: "25%", textAlign: "center", fontWeight: "bold" }}
-            >
-              Phone
-            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -64,9 +59,6 @@ export default function UserPageTable({ search }) {
               </TableCell>
               <TableCell sx={{ width: "25%", textAlign: "center" }}>
                 {row.email}
-              </TableCell>
-              <TableCell sx={{ width: "25%", textAlign: "center" }}>
-                {row.phone}
               </TableCell>
             </TableRow>
           ))}

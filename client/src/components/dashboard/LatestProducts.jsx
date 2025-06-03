@@ -6,57 +6,16 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import useGetAllProducts from "../../hooks/products/useGetAllProducts";
+import Loading from "../Loading";
 
-function createData(product, stock, price) {
-  return { product, stock, price };
-}
-const rows = [
-  createData(
-    <div className="flex gap-2 items-center w-fit">
-      <img
-        src="/dashboard/product.png"
-        className="w-[50px] h-[50px] rounded-md"
-      ></img>
-      <div className="flex items-start flex-col gap-1">
-        <p className="font-medium">Dash Cam</p>
-        <p className="text-sm text-[#7D7D7D]">A800S</p>
-      </div>
-    </div>,
-    35,
-    "$35"
-  ),
-  createData(
-    <div className="flex gap-2 items-center w-fit">
-      <img
-        src="/dashboard/product.png"
-        className="w-[50px] h-[50px] rounded-md"
-      ></img>
-      <div className="flex items-start flex-col gap-1">
-        <p className="font-medium">Dash Cam</p>
-        <p className="text-sm text-[#7D7D7D]">A800S</p>
-      </div>
-    </div>,
-    40,
-    "$35"
-  ),
-  createData(
-    <div className="flex gap-2 items-center max-w-fit">
-      <img
-        src="/dashboard/product.png"
-        className="w-[50px] h-[50px] rounded-md"
-      ></img>
-      <div className="flex items-start flex-col gap-1">
-        <p className="font-medium">Dash Cam</p>
-        <p className="text-sm text-[#7D7D7D]">A800S</p>
-      </div>
-    </div>,
-    50,
-    "$35"
-  ),
-];
+const rows = [];
 
 export default function LatestProducts() {
-  return (
+  const { loading, products } = useGetAllProducts();
+  return loading ? (
+    <Loading />
+  ) : (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
@@ -79,9 +38,9 @@ export default function LatestProducts() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {products.slice(0, 4).map((row) => (
             <TableRow
-              key={row.name}
+              key={row.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell
@@ -89,7 +48,13 @@ export default function LatestProducts() {
                 scope="row"
                 sx={{ width: "40%", textAlign: "center" }}
               >
-                {row.product}
+                <div className="flex gap-3 items-center">
+                  <img
+                    src={row.image}
+                    className="w-10 object-cover rounded-md"
+                  />
+                  <p>{row.name}</p>
+                </div>
               </TableCell>
               <TableCell sx={{ width: "30%", textAlign: "center" }}>
                 {row.stock}
