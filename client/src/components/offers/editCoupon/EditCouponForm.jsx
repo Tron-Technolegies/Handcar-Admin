@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormInput from "../../FormInput";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import useEditCoupon from "../../../hooks/offers/useEditCoupon";
 import { useParams } from "react-router-dom";
 import Loading from "../../Loading";
+import useGetSingleCoupon from "../../../hooks/offers/useGetSingleCoupon";
 
 export default function EditCouponForm() {
   const [name, setName] = useState("");
@@ -16,6 +17,18 @@ export default function EditCouponForm() {
   const { id } = useParams();
 
   const { loading, editCoupon } = useEditCoupon();
+  const { loading: getLoading, coupon } = useGetSingleCoupon({ id });
+
+  useEffect(() => {
+    if (coupon) {
+      setName(coupon.name || "");
+      setCode(coupon.coupon_code || "");
+      setDiscount(coupon.discount_percentage || "");
+      setStart(coupon.start_date || "");
+      setEnd(coupon.end_date || "");
+      setDescription(coupon.description || "");
+    }
+  }, [coupon, getLoading]);
   return (
     <div>
       <FormInput

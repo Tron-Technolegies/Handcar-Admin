@@ -70,13 +70,13 @@ export default function ProductTable({ search }) {
                   ></img>
                   <div className="flex items-start flex-col gap-1">
                     <p className="font-medium">{row.name}</p>
-                    <p className="text-sm text-[#7D7D7D]">Model No</p>
+                    <p className="text-sm text-[#7D7D7D]">{row.category}</p>
                   </div>
                 </Link>
                 ,
               </TableCell>
               <TableCell sx={{ width: "20%", textAlign: "center" }}>
-                {row.category}
+                {row.stock}
               </TableCell>
               <TableCell sx={{ width: "20%", textAlign: "center" }}>
                 {row.price}
