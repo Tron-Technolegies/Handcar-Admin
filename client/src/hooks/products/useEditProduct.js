@@ -16,6 +16,7 @@ const useEditProduct = () => {
     image,
     price,
     stock,
+    discount,
     description,
   }) => {
     const product_id = id;
@@ -26,7 +27,8 @@ const useEditProduct = () => {
     formdata.append("brand_name", brand_name);
     formdata.append("price", price);
     formdata.append("image", image);
-    formdata.append("discount_percentage", stock);
+    formdata.append("stock", stock);
+    formdata.append("discount_percentage", discount);
     formdata.append("description", description);
     try {
       const res = await axios.post(

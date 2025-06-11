@@ -23,6 +23,7 @@ export default function EditProductForm() {
   const [image, setImage] = useState();
   const [images, setImages] = useState("");
   const [price, setPrice] = useState("");
+  const [discount, setDiscount] = useState(0);
   const [stock, setStock] = useState("");
   const [description, setDescription] = useState("");
 
@@ -33,6 +34,7 @@ export default function EditProductForm() {
       setBrand(product.brand_name);
       setImages(product.image);
       setPrice(product.price);
+      setDiscount(product.discount_percentage);
       setStock(product.stock ? product.stock : 0);
       setDescription(product.description);
     }
@@ -96,6 +98,13 @@ export default function EditProductForm() {
         onchange={(e) => setPrice(e.target.value)}
       />
       <FormInput
+        title={"Discount"}
+        type={"number"}
+        placeholder={"10"}
+        value={discount}
+        onchange={(e) => setDiscount(e.target.value)}
+      />
+      <FormInput
         title={"Stock"}
         type={"number"}
         placeholder={"10"}
@@ -124,6 +133,7 @@ export default function EditProductForm() {
               price,
               description,
               stock,
+              discount,
             })
           }
           className="px-4 py-2 rounded-lg bg-black text-white"
