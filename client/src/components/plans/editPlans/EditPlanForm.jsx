@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormInput from "../../FormInput";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -6,6 +6,7 @@ import useEditPlan from "../../../hooks/plans/useEditPlan";
 import Loading from "../../Loading";
 import FormSelect from "../../FormSelect";
 import { useParams } from "react-router-dom";
+import useGetSinglePlan from "../../../hooks/plans/useGetSinglePlan";
 
 export default function EditPlanForm() {
   const [name, setName] = useState("");
@@ -14,8 +15,19 @@ export default function EditPlanForm() {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const { id } = useParams();
+  const { plan } = useGetSinglePlan({ id });
 
   const { loading, editPlan } = useEditPlan();
+
+  useEffect(() => {
+    if (plan) {
+      setName(plan.name);
+      setType(plan.service_type);
+      setDuration(plan.duration);
+      setPrice(plan.price);
+      setDescription(plan.description);
+    }
+  }, [plan]);
   return (
     <div>
       <FormInput

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { base_url } from "../../constants";
 
 const useGetSinglePlan = ({ id }) => {
   const [loading, setLoading] = useState(false);
@@ -9,9 +10,11 @@ const useGetSinglePlan = ({ id }) => {
   const getSinglePlan = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("url");
+      const res = await axios.get(`${base_url}/edit_plan/${id}/`, {
+        withCredentials: true,
+      });
       const data = res.data;
-      setPlan(data.plan);
+      setPlan(data);
     } catch (err) {
       toast.error(
         err?.response?.data?.msg || err?.error || "something went wrong"

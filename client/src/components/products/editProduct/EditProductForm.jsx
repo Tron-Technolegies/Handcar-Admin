@@ -6,11 +6,17 @@ import useGetSingleProduct from "../../../hooks/products/useGetSingleProduct";
 import { useParams } from "react-router-dom";
 import Loading from "../../Loading";
 import useEditProduct from "../../../hooks/products/useEditProduct";
+import useGetAllCategories from "../../../hooks/category/useGetAllCategories";
+import useGetAllBrands from "../../../hooks/brands/useGetAllBrands";
 
 export default function EditProductForm() {
   const { id } = useParams();
   const { loading, product } = useGetSingleProduct({ id });
   const { loading: editLoading, editProduct } = useEditProduct();
+  const { categories, loading: categoryLoading } = useGetAllCategories({
+    search: "",
+  });
+  const { brands, loading: brandLoading } = useGetAllBrands({ search: "" });
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
@@ -27,10 +33,20 @@ export default function EditProductForm() {
       setBrand(product.brand_name);
       setImages(product.image);
       setPrice(product.price);
-      setStock(product.stock ? product.stock : "");
+      setStock(product.stock ? product.stock : 0);
       setDescription(product.description);
     }
   }, [loading]);
+  useEffect(() => {
+    if (categories?.length > 0) {
+      setCategory(categories[0].name);
+    }
+  }, [categoryLoading]);
+  useEffect(() => {
+    if (brands?.length > 0) {
+      setBrand(brands[0].name);
+    }
+  }, [brandLoading]);
   return loading ? (
     <Loading />
   ) : (
@@ -44,13 +60,13 @@ export default function EditProductForm() {
       />
       <FormSelect
         title={"Category"}
-        list={["Category-1", "Category-2", "Category-3", "Category-4"]}
+        list={categories?.map((x) => x.name)}
         value={category}
         onchange={(e) => setCategory(e.target.value)}
       />
       <FormSelect
         title={"Brand"}
-        list={["Brand-1", "Brand-2", "Brand-3", "Brand-4"]}
+        list={brands?.map((x) => x.name)}
         value={brand}
         onchange={(e) => setBrand(e.target.value)}
       />
