@@ -49,7 +49,7 @@ export default function OrderTable({ search }) {
                 <div className="flex flex-col items-center gap-1">
                   <p>{row.name}</p>
                   <p>{row.contact}</p>
-                  <p>{row.address}</p>
+                  <p className="max-w-[200px]">{row.address}</p>
                 </div>
               </TableCell>
               <TableCell sx={{ textAlign: "center" }}>
@@ -68,7 +68,11 @@ export default function OrderTable({ search }) {
                 </div>
               </TableCell>
               <TableCell sx={{ textAlign: "center" }}>
-                {row.total_price}
+                <div className="flex flex-col gap-1">
+                  <p>{row.coupon?.name}</p>
+                  <p>{row.coupon?.coupon_code}</p>
+                  <p>{row.coupon?.discount_percentage}</p>
+                </div>
               </TableCell>
               <TableCell sx={{ textAlign: "center" }}>
                 {row.total_price}

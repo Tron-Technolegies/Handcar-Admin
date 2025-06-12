@@ -11,9 +11,9 @@ const useGetAllOrders = ({ search }) => {
     try {
       const response = await axios.get(`${base_url}/get_all_orders`, {
         withCredentials: true,
-        // params: {
-        //   search,
-        // },
+        params: {
+          search,
+        },
       });
       const data = response.data;
       setOrders(data.orders);

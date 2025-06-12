@@ -16,7 +16,7 @@ const useGetUserInfo = () => {
       });
       const data = res.data;
       setUser(data);
-    } catch (error) {
+    } catch (err) {
       console.log(
         err?.response?.data?.message ||
           err?.response?.data?.error ||
