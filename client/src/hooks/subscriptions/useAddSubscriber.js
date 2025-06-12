@@ -10,7 +10,7 @@ const useAddSubscriber = () => {
 
   const addSubscriber = async ({
     email,
-    zip,
+    address,
     vendor,
     service,
     plan,
@@ -21,7 +21,7 @@ const useAddSubscriber = () => {
     try {
       const res = await axios.post(`${base_url}/add_subscriber`, {
         email,
-        postal_code: zip,
+        address,
         assigned_vendor: vendor,
         service_type: service,
         plan,

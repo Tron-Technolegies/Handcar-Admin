@@ -108,7 +108,7 @@ export default function AddSubscriberForm() {
               duration,
               service,
               start,
-              zip,
+              address,
               vendor,
             })
           }
