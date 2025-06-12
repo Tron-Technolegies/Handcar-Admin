@@ -116,7 +116,7 @@ export default function OrderTable({ search }) {
                     </select>
                     <button
                       onClick={async () => {
-                        await updateStatus({ order_id: row.order_id });
+                        await updateStatus({ order_id: row.order_id, status });
                         setEditId("");
                         setStatus("Pending");
                         refetch();
@@ -125,6 +125,7 @@ export default function OrderTable({ search }) {
                     >
                       Update
                     </button>
+                    {updateLoading && <Loading />}
                   </div>
                 ) : (
                   <div className="flex gap-2 justify-center items-center">
@@ -134,7 +135,6 @@ export default function OrderTable({ search }) {
                     </p>
                   </div>
                 )}
-                {updateLoading && <Loading />}
               </TableCell>
             </TableRow>
           ))}
