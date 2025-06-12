@@ -16,7 +16,7 @@ export default function OrderTable({ search }) {
     search: search || "",
   });
   const [editId, setEditId] = useState("");
-  const [status, setStatus] = useState("Pending");
+  const [status, setStatus] = useState("pending");
   const { loading: updateLoading, updateStatus } = useUpdateOrderStatus();
   return (
     <TableContainer component={Paper}>
@@ -109,16 +109,16 @@ export default function OrderTable({ search }) {
                       className="py-1 px-3 rounded-lg bg-[#F5F5F5] border border-gray-300 text-gray-900 h-11"
                       onChange={(e) => setStatus(e.target.value)}
                     >
-                      <option value={"Pending"}>Pending</option>
-                      <option value={"Confirmed"}>Confirmed</option>
-                      <option value={"Shipped"}>Shipped</option>
-                      <option value={"Delivered"}>Delivered</option>
+                      <option value={"pending"}>Pending</option>
+                      <option value={"confirmed"}>Confirmed</option>
+                      <option value={"shipped"}>Shipped</option>
+                      <option value={"delivered"}>Delivered</option>
                     </select>
                     <button
                       onClick={async () => {
                         await updateStatus({ order_id: row.order_id, status });
                         setEditId("");
-                        setStatus("Pending");
+                        setStatus("pending");
                         refetch();
                       }}
                       className="px-3 py-1 rounded-md bg-blue-800 text-white"
