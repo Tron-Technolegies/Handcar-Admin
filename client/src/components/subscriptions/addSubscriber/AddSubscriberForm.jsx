@@ -4,18 +4,21 @@ import FormSelect from "../../FormSelect";
 import useAddSubscriber from "../../../hooks/subscriptions/useAddSubscriber";
 import Loading from "../../Loading";
 import useGetAllVendors from "../../../hooks/vendors/useGetAllVendors";
+import useFindVendorToAssign from "../../../hooks/subscriptions/useFindVendorToAssign";
 
 export default function AddSubscriberForm() {
   const [email, setEmail] = useState("");
-  const [zip, setZip] = useState("");
+  const [address, setAddress] = useState("");
   const [vendor, setVendor] = useState("");
   const [service, setService] = useState("Car Wash");
   const [plan, setPlan] = useState("Basic");
   const [duration, setDuration] = useState(6);
   const [start, setStart] = useState("");
+  const [nearby, setNearBy] = useState(false);
 
   const { loading, addSubscriber } = useAddSubscriber();
   const { loading: vendorLoading, vendors } = useGetAllVendors({ search: "" });
+  const { vendors: nearbyVendors, findVendors } = useFindVendorToAssign();
   return (
     <div>
       <FormInput
@@ -26,13 +29,41 @@ export default function AddSubscriberForm() {
         placeholder={"Enter Email"}
       />
       <FormInput
-        title={"User Postal Code"}
+        title={"Address"}
         type={"text"}
-        value={zip}
-        onchange={(e) => setZip(e.target.value)}
-        placeholder={"ZIP/PIN Code"}
+        value={address}
+        onchange={(e) => setAddress(e.target.value)}
+        placeholder={"Address"}
       />
-      {vendorLoading ? (
+      <button
+        onClick={async () => {
+          await findVendors({ address });
+          setNearBy(true);
+        }}
+        className={`px-4 py-1 rounded-md bg-black text-white my-5 ${
+          nearby && "hidden"
+        }`}
+      >
+        Find Nearby Vendors
+      </button>
+      <button
+        onClick={() => setNearBy(false)}
+        className={`px-4 py-1 rounded-md bg-black text-white my-5 ${
+          !nearby && "hidden"
+        }`}
+      >
+        Assign Vendors Normally
+      </button>
+      {nearby ? (
+        <div>
+          <FormSelect
+            title={"Assign Nearby Vendor"}
+            value={vendor}
+            onchange={(e) => setVendor(e.target.value)}
+            list={nearbyVendors?.map((x) => x.name)}
+          />
+        </div>
+      ) : vendorLoading ? (
         <Loading />
       ) : (
         <FormSelect
@@ -42,6 +73,7 @@ export default function AddSubscriberForm() {
           list={vendors.map((x) => x.name)}
         />
       )}
+
       <FormSelect
         title={"Service"}
         value={service}

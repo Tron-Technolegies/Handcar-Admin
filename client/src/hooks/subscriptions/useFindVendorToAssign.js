@@ -1,17 +1,22 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import { base_url } from "../../constants";
 
 const useFindVendorToAssign = () => {
   const [loading, setLoading] = useState(false);
   const [vendors, setVendors] = useState([]);
 
-  const findVendors = async ({ zip }) => {
+  const findVendors = async ({ address }) => {
     setLoading(true);
     try {
-      const res = await axios.get("url");
+      const res = await axios.post(
+        `${base_url}/get_nearby_vendor_on_add_subscription`,
+        { address },
+        { withCredentials: true }
+      );
       const data = res.data;
-      setVendors(data.vendors);
+      setVendors(data.nearby_vendors);
     } catch (err) {
       toast.error(
         err?.response?.data?.message ||
