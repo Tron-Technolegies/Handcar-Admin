@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -6,10 +6,18 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { CiEdit } from "react-icons/ci";
 import useGetAllOrders from "../../hooks/orders/useGetAllOrders";
+import useUpdateOrderStatus from "../../hooks/orders/useUpdateOrderStatus";
+import Loading from "../Loading";
 
 export default function OrderTable({ search }) {
-  const { loading, orders } = useGetAllOrders({ search: search || "" });
+  const { loading, orders, refetch } = useGetAllOrders({
+    search: search || "",
+  });
+  const [editId, setEditId] = useState("");
+  const [status, setStatus] = useState("Pending");
+  const { loading: updateLoading, updateStatus } = useUpdateOrderStatus();
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -61,23 +69,73 @@ export default function OrderTable({ search }) {
                     <div key={item.id} className="flex flex-col gap-1">
                       <p>{item.name}</p>
                       <p>
-                        {item.quantity} x {item.price}
+                        {item.quantity} x {item.price} ={" "}
+                        {parseInt(item.quantity) * parseInt(item.price)}
                       </p>
                     </div>
                   ))}
                 </div>
               </TableCell>
               <TableCell sx={{ textAlign: "center" }}>
-                <div className="flex flex-col gap-1">
-                  <p>{row.coupon?.name}</p>
-                  <p>{row.coupon?.coupon_code}</p>
-                  <p>{row.coupon?.discount_percentage}</p>
-                </div>
+                {row.coupon ? (
+                  <div className="flex flex-col gap-1">
+                    <p>{row.coupon?.name}</p>
+                    <p>{row.coupon?.coupon_code}</p>
+                    <p>Discount: {row.coupon?.discount_percentage}%</p>
+                  </div>
+                ) : (
+                  "N/A"
+                )}
               </TableCell>
               <TableCell sx={{ textAlign: "center" }}>
-                {row.total_price}
+                {row.coupon ? (
+                  <div className="flex flex-col gap-1">
+                    <p className="line-through">{row.total_price}</p>
+                    <p>
+                      {parseInt(row.total_price) -
+                        parseInt(row.total_price) *
+                          (parseInt(row.coupon.discount_percentage) / 100)}
+                    </p>
+                  </div>
+                ) : (
+                  row.total_price
+                )}
               </TableCell>
-              <TableCell sx={{ textAlign: "center" }}>{row.status}</TableCell>
+              <TableCell sx={{ textAlign: "center" }}>
+                {editId === row.order_id ? (
+                  <div className="flex flex-col gap-2 justify-center items-center">
+                    <select
+                      value={status}
+                      className="py-1 px-3 rounded-lg bg-[#F5F5F5] border border-gray-300 text-gray-900 h-11"
+                      onChange={(e) => setStatus(e.target.value)}
+                    >
+                      <option value={"Pending"}>Pending</option>
+                      <option value={"Confirmed"}>Confirmed</option>
+                      <option value={"Shipped"}>Shipped</option>
+                      <option value={"Delivered"}>Delivered</option>
+                    </select>
+                    <button
+                      onClick={async () => {
+                        await updateStatus({ order_id: row.order_id });
+                        setEditId("");
+                        setStatus("Pending");
+                        refetch();
+                      }}
+                      className="px-3 py-1 rounded-md bg-blue-800 text-white"
+                    >
+                      Update
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex gap-2 justify-center items-center">
+                    <p>{row.status}</p>
+                    <p onClick={() => setEditId(row.order_id)}>
+                      <CiEdit />
+                    </p>
+                  </div>
+                )}
+                {updateLoading && <Loading />}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
