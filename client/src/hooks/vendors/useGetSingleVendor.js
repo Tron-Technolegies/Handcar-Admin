@@ -14,8 +14,11 @@ const useGetSingleVendor = ({ id }) => {
       const data = res.data;
       setVendor(data.vendor_data);
     } catch (err) {
-      toast.error(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+      console.log(
+        err?.response?.data?.message ||
+          err?.response?.data?.error ||
+          err?.message ||
+          "something went wrong"
       );
     } finally {
       setLoading(false);

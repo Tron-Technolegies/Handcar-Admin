@@ -1,22 +1,22 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import { base_url } from "../../constants";
 
-const useGetAllCategories = ({ search }) => {
+const useGetAllOrders = ({ search }) => {
   const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState([]);
-  const getAllProducts = async () => {
-    setLoading(true);
+  const [orders, setOrders] = useState([]);
 
+  const getAllOrders = async () => {
+    setLoading(true);
     try {
-      const res = await axios.get(`${base_url}/view_category`, {
+      const response = await axios.get(`${base_url}/get_all_orders`, {
+        withCredentials: true,
         params: {
           search,
         },
       });
-      const data = res.data;
-      setCategories(data.categories);
+      const data = response.data;
+      setOrders(data.orders);
     } catch (err) {
       console.log(
         err?.response?.data?.message ||
@@ -29,13 +29,14 @@ const useGetAllCategories = ({ search }) => {
     }
   };
   useEffect(() => {
-    getAllProducts();
+    getAllOrders();
   }, []);
 
   const refetch = () => {
-    getAllProducts();
+    getAllOrders();
   };
-  return { loading, categories, refetch };
+
+  return { loading, refetch, orders };
 };
 
-export default useGetAllCategories;
+export default useGetAllOrders;

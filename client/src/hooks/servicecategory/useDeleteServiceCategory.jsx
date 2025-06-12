@@ -17,7 +17,12 @@ export default function useDeleteServiceCategory() {
       toast.success("successfully deleted category");
     } catch (error) {
       console.log(error);
-      toast.warn("something went wrong");
+      toast.warn(
+        err?.response?.data?.message ||
+          err?.response?.data?.error ||
+          err?.message ||
+          "something went wrong"
+      );
     } finally {
       setLoading(false);
     }

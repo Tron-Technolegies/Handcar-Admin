@@ -21,7 +21,12 @@ const useEditServiceCategory = () => {
       navigate("/service_category");
     } catch (error) {
       console.log(error);
-      toast.error("something went wrong");
+      toast.error(
+        err?.response?.data?.message ||
+          err?.response?.data?.error ||
+          err?.message ||
+          "something went wrong"
+      );
     } finally {
       setLoading(false);
     }

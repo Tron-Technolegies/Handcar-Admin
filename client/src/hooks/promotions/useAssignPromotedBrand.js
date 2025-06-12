@@ -17,9 +17,8 @@ const useAssignPromotedBrand = () => {
     } catch (err) {
       toast.error(
         err?.response?.data?.message ||
-          err?.error ||
-          err?.data?.error ||
           err?.response?.data?.error ||
+          err?.message ||
           "something went wrong"
       );
     } finally {

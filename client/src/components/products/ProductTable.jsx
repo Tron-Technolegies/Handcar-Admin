@@ -73,7 +73,6 @@ export default function ProductTable({ search }) {
                     <p className="text-sm text-[#7D7D7D]">{row.category}</p>
                   </div>
                 </Link>
-                ,
               </TableCell>
               <TableCell sx={{ width: "20%", textAlign: "center" }}>
                 {row.stock}

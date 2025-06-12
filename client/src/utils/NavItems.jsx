@@ -8,6 +8,7 @@ import { BiSolidOffer } from "react-icons/bi";
 import { MdLocalOffer } from "react-icons/md";
 import { TbLogs } from "react-icons/tb";
 import { GrPlan } from "react-icons/gr";
+import { VscChecklist } from "react-icons/vsc";
 export const navItems = [
   { id: 2, icon: <FaUsers />, name: "Users", path: "/users" },
   {
@@ -32,6 +33,7 @@ export const navItems = [
     path: "/subscriptions",
   },
   { id: 8, icon: <TbLogs />, name: "Logs", path: "/logs" },
+  { id: 13, icon: <VscChecklist />, name: "Orders", path: "/orders" },
   { id: 9, icon: <MdLocalOffer />, name: "Offers", path: "/offers" },
   { id: 10, icon: <BiSolidOffer />, name: "Promotions", path: "/promotions" },
   { id: 11, icon: <GrPlan />, name: "Plans", path: "/plans" },

@@ -15,7 +15,12 @@ const useGetSingleServiceCategory = ({ id }) => {
       const data = res.data;
       setCategory(data);
     } catch (error) {
-      console.log(error);
+      console.log(
+        err?.response?.data?.message ||
+          err?.response?.data?.error ||
+          err?.message ||
+          "something went wrong"
+      );
     } finally {
       setLoading(false);
     }

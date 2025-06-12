@@ -20,7 +20,10 @@ const useAddCategory = () => {
       navigate("/category");
     } catch (err) {
       toast.error(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+        err?.response?.data?.message ||
+          err?.response?.data?.error ||
+          err?.message ||
+          "something went wrong"
       );
     } finally {
       setLoading(false);

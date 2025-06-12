@@ -31,6 +31,7 @@ import LoginPage from "./pages/login/LoginPage";
 import ServiceCategoryPage from "./pages/servicecategory/ServiceCategoryPage";
 import AddServiceCategory from "./pages/servicecategory/AddServiceCategory";
 import EditServiceCategory from "./pages/servicecategory/EditServiceCategory";
+import OrderPage from "./pages/orders/OrderPage";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -124,6 +125,7 @@ export default function App() {
           path: "logs",
           element: <LogPage />,
         },
+        { path: "orders", element: <OrderPage /> },
         {
           path: "offers",
           element: <OfferPage />,

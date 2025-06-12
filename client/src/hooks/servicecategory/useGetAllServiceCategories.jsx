@@ -15,7 +15,12 @@ const useGetAllServiceCategories = () => {
       const data = res.data;
       setCategories(data.categories);
     } catch (error) {
-      console.log(error);
+      console.log(
+        err?.response?.data?.message ||
+          err?.response?.data?.error ||
+          err?.message ||
+          "something went wrong"
+      );
     } finally {
       setLoading(false);
     }

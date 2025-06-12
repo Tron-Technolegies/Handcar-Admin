@@ -64,7 +64,7 @@ export default function VendorTable({ search }) {
                 {row.name}
               </TableCell>
               <TableCell sx={{ width: "25%", textAlign: "center" }}>
-                {row.price}
+                {row["Joined at"]}
               </TableCell>
               <TableCell sx={{ width: "25%", textAlign: "center" }}>
                 {row.location ? row.location : "N/A"}

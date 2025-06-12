@@ -18,8 +18,11 @@ const useGetAllProducts = ({ search }) => {
       const data = res.data;
       setProducts(data.product);
     } catch (err) {
-      toast.error(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+      console.log(
+        err?.response?.data?.message ||
+          err?.response?.data?.error ||
+          err?.message ||
+          "something went wrong"
       );
     } finally {
       setLoading(false);
