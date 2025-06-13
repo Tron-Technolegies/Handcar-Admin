@@ -55,13 +55,28 @@ export default function AddSubscriberForm() {
         Assign Vendors Normally
       </button>
       {nearby ? (
-        <div>
-          <FormSelect
-            title={"Assign Nearby Vendor"}
-            value={vendor}
-            onchange={(e) => setVendor(e.target.value)}
-            list={nearbyVendors?.map((x) => x.name)}
-          />
+        <div className="form-row">
+          <label htmlFor="status" className="form-label">
+            Assign Nearby Vendor
+          </label>
+          <div className="flex items-center">
+            <select
+              id="status"
+              value={vendor}
+              onChange={(e) => setVendor(e.target.value)}
+              className={`w-full py-1 px-3 rounded-lg bg-[#F5F5F5] border border-gray-300 text-gray-900 h-11`}
+            >
+              {nearbyVendors?.map((item) => (
+                <option
+                  className="border-b py-1 border-gray-300"
+                  key={item.id}
+                  value={item.id}
+                >
+                  {`${item.name} (${item.address}) (${item.distance_km})km`}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       ) : vendorLoading ? (
         <Loading />
@@ -81,7 +96,7 @@ export default function AddSubscriberForm() {
                 <option
                   className="border-b py-1 border-gray-300"
                   key={item.id}
-                  value={item.name}
+                  value={item.id}
                 >
                   {`${item.name} (${item.location})`}
                 </option>
