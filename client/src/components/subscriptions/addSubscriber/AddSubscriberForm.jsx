@@ -9,7 +9,11 @@ import useFindVendorToAssign from "../../../hooks/subscriptions/useFindVendorToA
 export default function AddSubscriberForm() {
   const { loading, addSubscriber } = useAddSubscriber();
   const { loading: vendorLoading, vendors } = useGetAllVendors({ search: "" });
-  const { vendors: nearbyVendors, findVendors } = useFindVendorToAssign();
+  const {
+    loading: nearbyLoading,
+    vendors: nearbyVendors,
+    findVendors,
+  } = useFindVendorToAssign();
   const [nearby, setNearBy] = useState(false);
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
@@ -20,17 +24,12 @@ export default function AddSubscriberForm() {
   const [start, setStart] = useState("");
 
   useEffect(() => {
-    if (nearby) {
-      if (nearbyVendors.length > 0) {
-        setVendor(nearbyVendors[0].id);
-      }
+    if (nearby && nearbyVendors.length > 0) {
+      setVendor(nearbyVendors[0].id);
+    } else if (!nearby && vendors.length > 0) {
+      setVendor(vendors[0].id);
     }
-    if (!nearby) {
-      if (vendors.length > 0) {
-        setVendor(vendors[0].id);
-      }
-    }
-  }, [nearby, vendors]);
+  }, [nearby, vendors, vendorLoading, nearbyLoading, nearbyVendors]);
 
   return (
     <div>
