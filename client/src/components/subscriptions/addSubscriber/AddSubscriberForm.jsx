@@ -66,12 +66,29 @@ export default function AddSubscriberForm() {
       ) : vendorLoading ? (
         <Loading />
       ) : (
-        <FormSelect
-          title={"Assign Vendor"}
-          value={vendor}
-          onchange={(e) => setVendor(e.target.value)}
-          list={vendors.map((x) => x.name)}
-        />
+        <div className="form-row">
+          <label htmlFor="status" className="form-label">
+            Assign Vendor
+          </label>
+          <div className="flex items-center">
+            <select
+              id="status"
+              value={vendor}
+              onChange={(e) => setVendor(e.target.value)}
+              className={`w-full py-1 px-3 rounded-lg bg-[#F5F5F5] border border-gray-300 text-gray-900 h-11`}
+            >
+              {vendors?.map((item) => (
+                <option
+                  className="border-b py-1 border-gray-300"
+                  key={item.id}
+                  value={item.name}
+                >
+                  {`${item.name} (${item.location})`}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
       )}
 
       <FormSelect

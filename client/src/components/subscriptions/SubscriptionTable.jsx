@@ -20,39 +20,28 @@ export default function SubscriptionTable() {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow sx={{ backgroundColor: "#F9FAFB" }}>
-            <TableCell
-              sx={{ width: "16%", textAlign: "center", fontWeight: "bold" }}
-            >
+            <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
               Email
             </TableCell>
-            <TableCell
-              sx={{ width: "14%", textAlign: "center", fontWeight: "bold" }}
-            >
+            <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
               Service
             </TableCell>
-            <TableCell
-              sx={{ width: "14%", textAlign: "center", fontWeight: "bold" }}
-            >
+            <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
               Plan
             </TableCell>
-            <TableCell
-              sx={{ width: "14%", textAlign: "center", fontWeight: "bold" }}
-            >
+            <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
+              Assigned Vendor
+            </TableCell>
+            <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
               Duration
             </TableCell>
-            <TableCell
-              sx={{ width: "14%", textAlign: "center", fontWeight: "bold" }}
-            >
+            <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
               Start
             </TableCell>
-            <TableCell
-              sx={{ width: "14%", textAlign: "center", fontWeight: "bold" }}
-            >
+            <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
               End
             </TableCell>
-            <TableCell
-              sx={{ width: "14%", textAlign: "center", fontWeight: "bold" }}
-            >
+            <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
               Status
             </TableCell>
           </TableRow>
@@ -66,26 +55,23 @@ export default function SubscriptionTable() {
               <TableCell
                 component="th"
                 scope="row"
-                sx={{ width: "16%", textAlign: "center" }}
+                sx={{ textAlign: "center" }}
               >
                 {row.email}
               </TableCell>
-              <TableCell sx={{ width: "14%", textAlign: "center" }}>
+              <TableCell sx={{ textAlign: "center" }}>
                 {row.service_type}
               </TableCell>
-              <TableCell sx={{ width: "14%", textAlign: "center" }}>
-                {row.plan}
+              <TableCell sx={{ textAlign: "center" }}>{row.plan}</TableCell>
+              <TableCell sx={{ textAlign: "center" }}>
+                {row.assigned_vendor}
               </TableCell>
-              <TableCell sx={{ width: "14%", textAlign: "center" }}>
-                {row.duration}
-              </TableCell>
-              <TableCell sx={{ width: "14%", textAlign: "center" }}>
+              <TableCell sx={{ textAlign: "center" }}>{row.duration}</TableCell>
+              <TableCell sx={{ textAlign: "center" }}>
                 {row.start_date}
               </TableCell>
-              <TableCell sx={{ width: "14%", textAlign: "center" }}>
-                {row.end_date}
-              </TableCell>
-              <TableCell sx={{ width: "14%", textAlign: "center" }}>
+              <TableCell sx={{ textAlign: "center" }}>{row.end_date}</TableCell>
+              <TableCell sx={{ textAlign: "center" }}>
                 <div>
                   {new Date(row.end_date) >= new Date() ? (
                     <p className="bg-[#A5FF9647] rounded-s-full rounded-e-full py-1 flex gap-2 items-center justify-center text-[#1E9609]">

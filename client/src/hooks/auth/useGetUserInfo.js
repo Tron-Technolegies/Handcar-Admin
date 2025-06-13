@@ -23,7 +23,7 @@ const useGetUserInfo = () => {
           err?.message ||
           "something went wrong"
       );
-      // navigate("/login");
+      navigate("/login");
     } finally {
       setLoading(false);
     }
