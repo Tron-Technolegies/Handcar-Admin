@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormInput from "../../FormInput";
 import FormSelect from "../../FormSelect";
 import useAddSubscriber from "../../../hooks/subscriptions/useAddSubscriber";
@@ -7,18 +7,31 @@ import useGetAllVendors from "../../../hooks/vendors/useGetAllVendors";
 import useFindVendorToAssign from "../../../hooks/subscriptions/useFindVendorToAssign";
 
 export default function AddSubscriberForm() {
+  const { loading, addSubscriber } = useAddSubscriber();
+  const { loading: vendorLoading, vendors } = useGetAllVendors({ search: "" });
+  const { vendors: nearbyVendors, findVendors } = useFindVendorToAssign();
+  const [nearby, setNearBy] = useState(false);
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
-  const [vendor, setVendor] = useState("");
+  const [vendor, setVendor] = useState(0);
   const [service, setService] = useState("Car Wash");
   const [plan, setPlan] = useState("Basic");
   const [duration, setDuration] = useState(6);
   const [start, setStart] = useState("");
-  const [nearby, setNearBy] = useState(false);
 
-  const { loading, addSubscriber } = useAddSubscriber();
-  const { loading: vendorLoading, vendors } = useGetAllVendors({ search: "" });
-  const { vendors: nearbyVendors, findVendors } = useFindVendorToAssign();
+  useEffect(() => {
+    if (nearby) {
+      if (nearbyVendors.length > 0) {
+        setVendor(nearbyVendors[0].id);
+      }
+    }
+    if (!nearby) {
+      if (vendors.length > 0) {
+        setVendor(vendors[0].id);
+      }
+    }
+  }, [nearby, vendors]);
+
   return (
     <div>
       <FormInput
