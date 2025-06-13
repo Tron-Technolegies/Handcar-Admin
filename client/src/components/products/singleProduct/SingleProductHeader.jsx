@@ -23,6 +23,10 @@ export default function SingleProductHeader({ data }) {
           <ProductDetailElt type={"Stock"} value={data.stock || "N/A"} />
           <ProductDetailElt type={"Brand"} value={data.brand_name} />
           <ProductDetailElt type={"Price"} value={`$ ${data.price}`} />
+          <ProductDetailElt
+            type={"Discount"}
+            value={data.discount_percentage}
+          />
           <ProductDetailElt type={"Category"} value={data.category_name} />
         </div>
       </div>

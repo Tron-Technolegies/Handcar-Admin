@@ -27,24 +27,16 @@ export default function ProductTable({ search }) {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow sx={{ backgroundColor: "#F9FAFB" }}>
-            <TableCell
-              sx={{ width: "40%", textAlign: "left", fontWeight: "bold" }}
-            >
+            <TableCell sx={{ textAlign: "left", fontWeight: "bold" }}>
               Product
             </TableCell>
-            <TableCell
-              sx={{ width: "20%", textAlign: "center", fontWeight: "bold" }}
-            >
+            <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
               Stock
             </TableCell>
-            <TableCell
-              sx={{ width: "20%", textAlign: "center", fontWeight: "bold" }}
-            >
+            <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
               Price
             </TableCell>
-            <TableCell
-              sx={{ width: "20%", textAlign: "center", fontWeight: "bold" }}
-            >
+            <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
               Action
             </TableCell>
           </TableRow>
@@ -58,7 +50,7 @@ export default function ProductTable({ search }) {
               <TableCell
                 component="th"
                 scope="row"
-                sx={{ width: "40%", textAlign: "center" }}
+                sx={{ textAlign: "center" }}
               >
                 <Link
                   to={`/products/${row.id}`}
@@ -69,18 +61,14 @@ export default function ProductTable({ search }) {
                     className="w-[50px] h-[50px] rounded-md"
                   ></img>
                   <div className="flex items-start flex-col gap-1">
-                    <p className="font-medium">{row.name}</p>
+                    <p className="font-medium">{`${row.name} (${row.brand})`}</p>
                     <p className="text-sm text-[#7D7D7D]">{row.category}</p>
                   </div>
                 </Link>
               </TableCell>
-              <TableCell sx={{ width: "20%", textAlign: "center" }}>
-                {row.stock}
-              </TableCell>
-              <TableCell sx={{ width: "20%", textAlign: "center" }}>
-                {row.price}
-              </TableCell>
-              <TableCell sx={{ width: "20%", textAlign: "center" }}>
+              <TableCell sx={{ textAlign: "center" }}>{row.stock}</TableCell>
+              <TableCell sx={{ textAlign: "center" }}>{row.price}</TableCell>
+              <TableCell sx={{ textAlign: "center" }}>
                 <div className="flex gap-5 justify-center text-xl text-[#ABABAB]">
                   <Link to={`/products/${row.id}/edit`}>
                     <MdOutlineEdit />
