@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,9 +9,17 @@ import Paper from "@mui/material/Paper";
 import { GoDotFill } from "react-icons/go";
 import useGetAllSubscriptions from "../../hooks/subscriptions/useGetAllSubscriptions";
 import Loading from "../Loading";
+import { AdminContext } from "../../AdminContext";
 
-export default function SubscriptionTable() {
-  const { loading, subs } = useGetAllSubscriptions();
+export default function SubscriptionTable({ search }) {
+  const { loading, subs, refetch } = useGetAllSubscriptions({
+    search: search || "",
+  });
+  const { refetchTrigger } = useContext(AdminContext);
+
+  useEffect(() => {
+    refetch();
+  }, [refetchTrigger]);
 
   return loading ? (
     <Loading />

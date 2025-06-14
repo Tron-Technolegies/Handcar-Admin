@@ -3,14 +3,19 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { base_url } from "../../constants";
 
-const useGetAllSubscriptions = () => {
+const useGetAllSubscriptions = ({ search }) => {
   const [loading, setLoading] = useState(false);
   const [subs, setSubs] = useState([]);
 
   const getAllSubs = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${base_url}/view_subscribers`);
+      const res = await axios.get(`${base_url}/view_subscribers`, {
+        withCredentials: true,
+        params: {
+          search,
+        },
+      });
       const data = res.data;
       setSubs(data.user);
     } catch (err) {

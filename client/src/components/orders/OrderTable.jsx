@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -10,6 +10,7 @@ import { CiEdit } from "react-icons/ci";
 import useGetAllOrders from "../../hooks/orders/useGetAllOrders";
 import useUpdateOrderStatus from "../../hooks/orders/useUpdateOrderStatus";
 import Loading from "../Loading";
+import { AdminContext } from "../../AdminContext";
 
 export default function OrderTable({ search }) {
   const { loading, orders, refetch } = useGetAllOrders({
@@ -18,6 +19,11 @@ export default function OrderTable({ search }) {
   const [editId, setEditId] = useState("");
   const [status, setStatus] = useState("pending");
   const { loading: updateLoading, updateStatus } = useUpdateOrderStatus();
+  const { refetchTrigger } = useContext(AdminContext);
+
+  useEffect(() => {
+    refetch();
+  }, [refetchTrigger]);
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
