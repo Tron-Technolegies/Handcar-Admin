@@ -76,7 +76,7 @@ export default function LogTable({ search, type }) {
                 scope="row"
                 sx={{ width: "20%", textAlign: "center" }}
               >
-                {"UserName"}
+                {row.user_name}
               </TableCell>
               <TableCell sx={{ width: "20%", textAlign: "center" }}>
                 {row.timestamp.slice(0, 10)}
