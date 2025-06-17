@@ -2,7 +2,7 @@ import React from "react";
 
 export default function StatElt({ icon, title, number, percent, dip, up }) {
   return (
-    <div className="flex flex-col md:items-start items-center gap-2 py-5 px-10 rounded-md shadow-md">
+    <div className="flex flex-col items-center gap-2 py-5 px-10 rounded-md shadow-md w-[250px]">
       <div className="flex gap-3 items-center">
         <img src={icon}></img>
         <p className="font-semibold">{title}</p>
