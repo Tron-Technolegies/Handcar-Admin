@@ -7,12 +7,12 @@ export default function StatElt({ icon, title, number, percent, dip, up }) {
         <img src={icon}></img>
         <p className="font-semibold">{title}</p>
       </div>
-      <p className="text-3xl font-bold">{number}</p>
-      <div className="flex gap-2 items-center">
+      <p className="text-3xl text-center font-bold">{number}</p>
+      {/* <div className="flex gap-2 items-center">
         <p className={`${up ? "text-green-600" : "text-red-600"}`}>{dip}</p>
         <p className={`${up ? "text-green-600" : "text-red-600"}`}>{percent}</p>
         <p>in last 1 month</p>
-      </div>
+      </div> */}
     </div>
   );
 }
