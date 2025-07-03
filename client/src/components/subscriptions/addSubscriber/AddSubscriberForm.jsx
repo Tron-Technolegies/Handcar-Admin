@@ -36,6 +36,21 @@ export default function AddSubscriberForm() {
     });
   };
 
+  const handleVendorFunction = (e)=> {
+    const selectedVendors = Array.from(e.target.selectedOptions, (option)=> option.value)
+    setVendor((prevSelected)=>{
+      const currentSelections = [...prevSelected]
+      selectedVendors.forEach((value)=>{
+        if(!currentSelections.includes(value)){
+          currentSelections.push(value)
+        } else {
+          currentSelections.splice(currentSelections.indexOf(value), 1)
+        }
+      })
+      return currentSelections
+    })
+  }
+
   return (
     <div>
       <FormInput
@@ -83,11 +98,7 @@ export default function AddSubscriberForm() {
               id="status"
               multiple
               value={vendor}
-              onChange={(e) =>
-                setVendor(
-                  [...e.target.selectedOptions].map((opt) => parseInt(opt.value))
-                )
-              }
+              onChange={handleVendorFunction}
               className="w-full py-1 px-3 rounded-lg bg-[#F5F5F5] border border-gray-300 text-gray-900 h-28"
             >
               {nearbyVendors?.map((item) => (
@@ -110,11 +121,7 @@ export default function AddSubscriberForm() {
               id="status"
               multiple
               value={vendor}
-              onChange={(e) =>
-                setVendor(
-                  [...e.target.selectedOptions].map((opt) => parseInt(opt.value))
-                )
-              }
+              onChange={handleVendorFunction}
               className="w-full py-1 px-3 rounded-lg bg-[#F5F5F5] border border-gray-300 text-gray-900 h-28"
             >
               {vendors?.map((item) => (
