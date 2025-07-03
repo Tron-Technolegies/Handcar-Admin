@@ -14,22 +14,27 @@ export default function AddSubscriberForm() {
     vendors: nearbyVendors,
     findVendors,
   } = useFindVendorToAssign();
+
   const [nearby, setNearBy] = useState(false);
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
-  const [vendor, setVendor] = useState(0);
+  const [vendor, setVendor] = useState([]); 
   const [service, setService] = useState("Car Wash");
   const [plan, setPlan] = useState("Basic");
   const [duration, setDuration] = useState(6);
   const [start, setStart] = useState("");
 
-  useEffect(() => {
-    if (nearby && nearbyVendors.length > 0) {
-      setVendor(nearbyVendors[0].id);
-    } else if (!nearby && vendors.length > 0) {
-      setVendor(vendors[0].id);
-    }
-  }, [nearby, vendors, vendorLoading, nearbyLoading, nearbyVendors]);
+  const handleSubmit = () => {
+    addSubscriber({
+      email,
+      plan,
+      duration,
+      service,
+      start,
+      address,
+      vendor,
+    });
+  };
 
   return (
     <div>
@@ -66,25 +71,28 @@ export default function AddSubscriberForm() {
       >
         Assign Vendors Normally
       </button>
+
+    
       {nearby ? (
         <div className="form-row">
           <label htmlFor="status" className="form-label">
-            Assign Nearby Vendor
+            Assign Nearby Vendors
           </label>
           <div className="flex items-center">
             <select
               id="status"
+              multiple
               value={vendor}
-              onChange={(e) => setVendor(e.target.value)}
-              className={`w-full py-1 px-3 rounded-lg bg-[#F5F5F5] border border-gray-300 text-gray-900 h-11`}
+              onChange={(e) =>
+                setVendor(
+                  [...e.target.selectedOptions].map((opt) => parseInt(opt.value))
+                )
+              }
+              className="w-full py-1 px-3 rounded-lg bg-[#F5F5F5] border border-gray-300 text-gray-900 h-28"
             >
               {nearbyVendors?.map((item) => (
-                <option
-                  className="border-b py-1 border-gray-300"
-                  key={item.id}
-                  value={item.id}
-                >
-                  {`${item.name} (${item.address}) (${item.distance_km})km`}
+                <option key={item.id} value={item.id}>
+                  {`${item.name} (${item.address}) (${item.distance_km}km)`}
                 </option>
               ))}
             </select>
@@ -95,21 +103,22 @@ export default function AddSubscriberForm() {
       ) : (
         <div className="form-row">
           <label htmlFor="status" className="form-label">
-            Assign Vendor
+            Assign Vendors
           </label>
           <div className="flex items-center">
             <select
               id="status"
+              multiple
               value={vendor}
-              onChange={(e) => setVendor(e.target.value)}
-              className={`w-full py-1 px-3 rounded-lg bg-[#F5F5F5] border border-gray-300 text-gray-900 h-11`}
+              onChange={(e) =>
+                setVendor(
+                  [...e.target.selectedOptions].map((opt) => parseInt(opt.value))
+                )
+              }
+              className="w-full py-1 px-3 rounded-lg bg-[#F5F5F5] border border-gray-300 text-gray-900 h-28"
             >
               {vendors?.map((item) => (
-                <option
-                  className="border-b py-1 border-gray-300"
-                  key={item.id}
-                  value={item.id}
-                >
+                <option key={item.id} value={item.id}>
                   {`${item.name} (${item.location})`}
                 </option>
               ))}
@@ -118,6 +127,7 @@ export default function AddSubscriberForm() {
         </div>
       )}
 
+      {/* SERVICE / PLAN / DURATION / START DATE */}
       <FormSelect
         title={"Service"}
         value={service}
@@ -143,24 +153,16 @@ export default function AddSubscriberForm() {
         type={"date"}
       />
 
-      <div className="flex justify-end ">
+      {/* SUBMIT BUTTON */}
+      <div className="flex justify-end mt-4">
         <button
-          onClick={() =>
-            addSubscriber({
-              email,
-              plan,
-              duration,
-              service,
-              start,
-              address,
-              vendor,
-            })
-          }
+          type="button"
+          onClick={handleSubmit}
           className="px-4 py-2 bg-black text-white rounded-lg"
+          disabled={loading}
         >
-          Add Subscriber
+          {loading ? "Adding..." : "Add Subscriber"}
         </button>
-        {loading && <Loading />}
       </div>
     </div>
   );

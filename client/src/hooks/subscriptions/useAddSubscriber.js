@@ -19,16 +19,22 @@ const useAddSubscriber = () => {
   }) => {
     setLoading(true);
     try {
-      const res = await axios.post(`${base_url}/add_subscriber`, {
-        email,
-        address,
-        assigned_vendor: vendor,
-        service_type: service,
-        plan,
-        duration,
-        start_date: start,
-      });
-      const data = res.data;
+      const res = await axios.post(
+        `${base_url}/add_subscriber`,
+        {
+          email,
+          address,
+          assigned_vendor: vendor,
+          service_type: service,
+          plan,
+          duration,
+          start_date: start,
+        },
+        {
+          withCredentials: true, 
+        }
+      );
+
       toast.success("Subscriber added successfully");
       navigate("/subscriptions");
     } catch (err) {
@@ -36,12 +42,13 @@ const useAddSubscriber = () => {
         err?.response?.data?.message ||
           err?.response?.data?.error ||
           err?.message ||
-          "something went wrong"
+          "Something went wrong"
       );
     } finally {
       setLoading(false);
     }
   };
+
   return { loading, addSubscriber };
 };
 

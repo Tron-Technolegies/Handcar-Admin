@@ -38,7 +38,7 @@ export default function SubscriptionTable({ search }) {
               Plan
             </TableCell>
             <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
-              Assigned Vendor
+              Assigned Vendors
             </TableCell>
             <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
               Duration
@@ -60,24 +60,19 @@ export default function SubscriptionTable({ search }) {
               key={index}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell
-                component="th"
-                scope="row"
-                sx={{ textAlign: "center" }}
-              >
-                {row.email}
-              </TableCell>
-              <TableCell sx={{ textAlign: "center" }}>
-                {row.service_type}
-              </TableCell>
+              <TableCell sx={{ textAlign: "center" }}>{row.email}</TableCell>
+              <TableCell sx={{ textAlign: "center" }}>{row.service_type}</TableCell>
               <TableCell sx={{ textAlign: "center" }}>{row.plan}</TableCell>
+
+              
               <TableCell sx={{ textAlign: "center" }}>
-                {row.assigned_vendor}
+                {row.assigned_vendors?.length > 0
+                  ? row.assigned_vendors.join(", ")
+                  : "Not Assigned"}
               </TableCell>
+
               <TableCell sx={{ textAlign: "center" }}>{row.duration}</TableCell>
-              <TableCell sx={{ textAlign: "center" }}>
-                {row.start_date}
-              </TableCell>
+              <TableCell sx={{ textAlign: "center" }}>{row.start_date}</TableCell>
               <TableCell sx={{ textAlign: "center" }}>{row.end_date}</TableCell>
               <TableCell sx={{ textAlign: "center" }}>
                 <div>
