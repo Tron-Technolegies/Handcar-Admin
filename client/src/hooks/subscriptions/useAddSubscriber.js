@@ -1,4 +1,13 @@
-const addSubscriber = async ({
+import React, { useState } from 'react'
+import { useNavigate } from "react-router-dom"
+import { base_url } from '../../constants'
+import { toast } from 'react-toastify'
+
+const useAddSubscriber = () => {
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
+
+  const addSubscriber = async ({
   email,
   address,
   vendor,
@@ -38,3 +47,11 @@ const addSubscriber = async ({
     setLoading(false);
   }
 };
+
+return {loading, addSubscriber}
+
+}
+
+export default useAddSubscriber
+
+
