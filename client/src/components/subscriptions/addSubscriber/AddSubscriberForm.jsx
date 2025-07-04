@@ -32,8 +32,9 @@ export default function AddSubscriberForm() {
       service,
       start,
       address,
-      vendor,
+      assigned_vendors: vendor, 
     });
+
   };
 
   const handleVendorFunction = (e)=> {
