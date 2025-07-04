@@ -1,55 +1,40 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { base_url } from "../../constants";
+const addSubscriber = async ({
+  email,
+  address,
+  vendor,
+  service,
+  plan,
+  duration,
+  start,
+}) => {
+  setLoading(true);
+  try {
+    const res = await axios.post(
+      `${base_url}/add_subscriber`,
+      {
+        email,
+        address,
+        assigned_vendors: vendor, 
+        service_type: service,
+        plan,
+        duration,
+        start_date: start,
+      },
+      {
+        withCredentials: true, 
+      }
+    );
 
-const useAddSubscriber = () => {
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-
-  const addSubscriber = async ({
-    email,
-    address,
-    vendor,
-    service,
-    plan,
-    duration,
-    start,
-  }) => {
-    setLoading(true);
-    try {
-      const res = await axios.post(
-        `${base_url}/add_subscriber`,
-        {
-          email,
-          address,
-          assigned_vendor: vendor,
-          service_type: service,
-          plan,
-          duration,
-          start_date: start,
-        },
-        {
-          withCredentials: true, 
-        }
-      );
-
-      toast.success("Subscriber added successfully");
-      navigate("/subscriptions");
-    } catch (err) {
-      toast.error(
-        err?.response?.data?.message ||
-          err?.response?.data?.error ||
-          err?.message ||
-          "Something went wrong"
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return { loading, addSubscriber };
+    toast.success("Subscriber added successfully");
+    navigate("/subscriptions");
+  } catch (err) {
+    toast.error(
+      err?.response?.data?.message ||
+        err?.response?.data?.error ||
+        err?.message ||
+        "Something went wrong"
+    );
+  } finally {
+    setLoading(false);
+  }
 };
-
-export default useAddSubscriber;
