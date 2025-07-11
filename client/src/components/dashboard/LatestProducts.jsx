@@ -35,6 +35,11 @@ export default function LatestProducts() {
             >
               Price
             </TableCell>
+                        <TableCell
+              sx={{ width: "30%", textAlign: "center", fontWeight: "bold" }}
+            >
+              Discounted Price
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -60,7 +65,10 @@ export default function LatestProducts() {
                 {row.stock}
               </TableCell>
               <TableCell sx={{ width: "30%", textAlign: "center" }}>
-                {row.price}
+                {row.original_price}
+              </TableCell>
+              <TableCell sx={{ width: "30%", textAlign: "center" }}>
+                {row.discounted_price}
               </TableCell>
             </TableRow>
           ))}

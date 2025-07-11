@@ -27,7 +27,7 @@ export default function UserPageTable({ search }) {
             <TableCell
               sx={{ width: "25%", textAlign: "center", fontWeight: "bold" }}
             >
-              Username
+              Phone
             </TableCell>
             <TableCell
               sx={{ width: "25%", textAlign: "center", fontWeight: "bold" }}
