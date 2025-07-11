@@ -37,6 +37,9 @@ export default function ProductTable({ search }) {
               Price
             </TableCell>
             <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
+              Discounted Price
+            </TableCell>
+            <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
               Action
             </TableCell>
           </TableRow>
@@ -67,7 +70,8 @@ export default function ProductTable({ search }) {
                 </Link>
               </TableCell>
               <TableCell sx={{ textAlign: "center" }}>{row.stock}</TableCell>
-              <TableCell sx={{ textAlign: "center" }}>{row.price}</TableCell>
+              <TableCell sx={{ textAlign: "center" }}>{row.original_price}</TableCell>
+              <TableCell sx={{ textAlign: "center" }}>{row.discounted_price}</TableCell>
               <TableCell sx={{ textAlign: "center" }}>
                 <div className="flex gap-5 justify-center text-xl text-[#ABABAB]">
                   <Link to={`/products/${row.id}/edit`}>
