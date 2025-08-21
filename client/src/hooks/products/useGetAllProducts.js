@@ -16,7 +16,7 @@ const useGetAllProducts = ({ search }) => {
         },
       });
       const data = res.data;
-      setProducts(data.product);
+      setProducts(data.products);
     } catch (err) {
       console.log(
         err?.response?.data?.message ||
