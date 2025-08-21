@@ -20,53 +20,31 @@ export default function LatestProducts() {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow sx={{ backgroundColor: "#F9FAFB" }}>
-            <TableCell
-              sx={{ width: "40%", textAlign: "left", fontWeight: "bold" }}
-            >
+            <TableCell sx={{ width: "40%", textAlign: "left", fontWeight: "bold" }}>
               Product
             </TableCell>
-            <TableCell
-              sx={{ width: "30%", textAlign: "center", fontWeight: "bold" }}
-            >
+            <TableCell sx={{ width: "30%", textAlign: "center", fontWeight: "bold" }}>
               Stock
             </TableCell>
-            <TableCell
-              sx={{ width: "30%", textAlign: "center", fontWeight: "bold" }}
-            >
+            <TableCell sx={{ width: "30%", textAlign: "center", fontWeight: "bold" }}>
               Price
             </TableCell>
-                        <TableCell
-              sx={{ width: "30%", textAlign: "center", fontWeight: "bold" }}
-            >
+            <TableCell sx={{ width: "30%", textAlign: "center", fontWeight: "bold" }}>
               Discounted Price
             </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {products.slice(0, 4).map((row) => (
-            <TableRow
-              key={row.id}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell
-                component="th"
-                scope="row"
-                sx={{ width: "40%", textAlign: "center" }}
-              >
+          {products?.slice(0, 4).map((row) => (
+            <TableRow key={row.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+              <TableCell component="th" scope="row" sx={{ width: "40%", textAlign: "center" }}>
                 <div className="flex gap-3 items-center">
-                  <img
-                    src={row.image}
-                    className="w-10 object-cover rounded-md"
-                  />
+                  <img src={row.image} className="w-10 object-cover rounded-md" />
                   <p>{row.name}</p>
                 </div>
               </TableCell>
-              <TableCell sx={{ width: "30%", textAlign: "center" }}>
-                {row.stock}
-              </TableCell>
-              <TableCell sx={{ width: "30%", textAlign: "center" }}>
-                {row.original_price}
-              </TableCell>
+              <TableCell sx={{ width: "30%", textAlign: "center" }}>{row.stock}</TableCell>
+              <TableCell sx={{ width: "30%", textAlign: "center" }}>{row.original_price}</TableCell>
               <TableCell sx={{ width: "30%", textAlign: "center" }}>
                 {row.discounted_price}
               </TableCell>
